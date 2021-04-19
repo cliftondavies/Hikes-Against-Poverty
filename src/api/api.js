@@ -2,7 +2,7 @@ import {
   loadHikes, loadBookings, loadHikeError, loadBookingError,
 } from '../redux/actions';
 
-export const hikes = ({
+export const getHikes = ({
   accessToken, uid, client, tokenType, expiry,
 }) => async (dispatch, getState) => {
   try {
@@ -129,17 +129,15 @@ export const signOut = async ({ uid, client, accessToken }) => {
 
     if (!response.ok) { throw new Error('Response status was not ok'); }
 
-    const responseBody = await response.json();
-
-    return responseBody;
+    return response.json();
   } catch (error) {
     return error;
   }
 };
 
-export const book = async (id, bookingParams, {
+export const book = (id, bookingParams, {
   accessToken, uid, client, tokenType, expiry,
-}) => {
+}) => async (dispatch, getState) => {
   try {
     const url = `https://h-a-p.herokuapp.com/hikes/${id}/appointments`;
     const response = await fetch(url, {
@@ -159,8 +157,8 @@ export const book = async (id, bookingParams, {
 
     const responseBody = await response.json();
 
-    return responseBody;
+    if (getState().bookings.bookings) { dispatch(loadBookings(responseBody)); } // empty array null?
   } catch (error) {
-    return error;
+    dispatch(loadBookingError({ error: error.message }));
   }
 };
