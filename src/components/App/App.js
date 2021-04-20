@@ -1,25 +1,31 @@
-import './App.scss';
+import {
+  BrowserRouter, Switch, Route, Redirect,
+} from 'react-router-dom';
+import SideBar from '../SideBar/SideBar';
+import Home from '../Home/Home';
+import Hikes from '../Hikes/Hikes';
+import Bookings from '../Bookings/Bookings';
 
-function App() {
+const App = () => {
+  const loggedIn = JSON.parse(sessionStorage.getItem('user'));
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit
-          <code>src/App.js</code>
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <SideBar />
+      <Switch>
+        <Route exact path="/">
+          {loggedIn ? <Redirect to="/hikes" /> : <Home />}
+        </Route>
+        <Route path="/hikes">
+          {!loggedIn ? <Redirect to="/" /> : <Hikes />}
+        </Route>
+        <Route path="/bookings">
+          {!loggedIn ? <Redirect to="/" /> : <Bookings />}
+        </Route>
+        <Route render={() => <h1>404: Page Not Found!</h1>} />
+      </Switch>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
