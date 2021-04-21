@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import {
-  LOAD_HIKES, LOAD_BOOKINGS, LOAD_HIKE_ERROR, LOAD_BOOKING_ERROR,
-  RESET_STORE,
+  LOGIN, LOGOUT, LOAD_HIKES, LOAD_BOOKINGS, LOAD_HIKE_ERROR, LOAD_BOOKING_ERROR,
 } from './actions';
 
 export const hikesInitialState = {
@@ -13,8 +12,18 @@ export const hikesInitialState = {
 export const bookingsInitialState = {
   bookings: [],
   loading: 'idle',
-  // newBooking: false,
   error: null,
+};
+
+export const authenticated = (state = false, action) => {
+  switch (action.type) {
+    case LOGIN:
+      return true;
+    case LOGOUT:
+      return false;
+    default:
+      return state;
+  }
 };
 
 export const hikes = (state = hikesInitialState, action) => {
@@ -23,7 +32,7 @@ export const hikes = (state = hikesInitialState, action) => {
       return {
         ...state,
         hikes: action.payload.hikes,
-        defaultLoading: 'completed',
+        loading: 'completed',
         error: null,
       };
     case LOAD_HIKE_ERROR:
@@ -32,7 +41,7 @@ export const hikes = (state = hikesInitialState, action) => {
         loading: 'failed',
         error: action.payload.error,
       };
-    case RESET_STORE:
+    case LOGOUT:
       return hikesInitialState;
     default:
       return state;
@@ -48,25 +57,20 @@ export const bookings = (state = bookingsInitialState, action) => {
         loading: 'completed',
         error: null,
       };
-    // case UPDATE_BOOKING_STATUS:
-    //   return {
-    //     ...state,
-    //     newBooking: action.payload.status,
-    //   };
     case LOAD_BOOKING_ERROR:
       return {
         ...state,
         loading: 'failed',
         error: action.payload.error,
       };
-    case RESET_STORE:
+    case LOGOUT:
       return bookingsInitialState;
     default:
       return state;
   }
 };
 
-export default combineReducers({ hikes, bookings });
+export default combineReducers({ authenticated, hikes, bookings });
 // const appReducer = combineReducers({ hikes, bookings });
 
 // const rootReducer = (state, action) => {
