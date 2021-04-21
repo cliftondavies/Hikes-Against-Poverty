@@ -18,7 +18,7 @@ const Hikes = () => {
 
           <span>Please select a hike</span>
 
-          <HikeList />
+          <HikeList hikes={hikes} />
         </main>
       </Route>
       <Route
