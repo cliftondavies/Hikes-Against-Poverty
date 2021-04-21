@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import facebook from '../../assets/facebook.svg';
 import google from '../../assets/google-plus.svg';
 import twitter from '../../assets/twitter.svg';
+import styles from './HikeCard.module.scss';
 
 const HikeCard = ({ hike }) => {
   const { id, name, thumbnail_image: thumbnail } = hike;
@@ -13,14 +14,16 @@ const HikeCard = ({ hike }) => {
   };
 
   return (
-    <article>
-      <Link to={`hikes/${id}`} />
+    <article className={styles.hikeCard}>
+      <div>
+        <Link to={`hikes/${id}`} />
 
-      <img src={thumbnail} width="200" height="200" alt="thumbnail" />
+        <img src={thumbnail} width="200" height="200" alt="thumbnail" />
 
-      <h3>{name}</h3>
+        <h3>{name}</h3>
 
-      <p>{description[name]}</p>
+        <p>{description[name]}</p>
+      </div>
 
       <div>
         <img src={facebook} width="20" height="20" alt="facebook-logo" />

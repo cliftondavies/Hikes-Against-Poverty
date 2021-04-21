@@ -44,7 +44,8 @@ const Hike = ({ hike }) => {
     <main>
       <section>
         <img src={image} width="600" height="600" alt="main" />
-        <div><span role="img" aria-label="play backward">◀️</span></div>
+
+        <div><span>&#9667;</span></div>
       </section>
       <section>
         <h2>{name}</h2>
@@ -52,10 +53,12 @@ const Hike = ({ hike }) => {
         <span>- optional costs available to any booking</span>
 
         <table>
-          {tableRow('Travel fee', '£20')}
-          {tableRow('Meal fee', '£10')}
-          {tableRow('Gear fee', '£10')}
-          {tableRow('Total amount payabke', '£40')}
+          <tbody>
+            {tableRow('Travel fee', '£20')}
+            {tableRow('Meal fee', '£10')}
+            {tableRow('Gear fee', '£10')}
+            {tableRow('Total amount payabke', '£40')}
+          </tbody>
         </table>
 
         <span>100% of fees are donated</span>
