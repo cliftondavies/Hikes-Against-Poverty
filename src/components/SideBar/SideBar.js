@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { signOut } from '../../api/api';
-import { resetStore } from '../../redux/actions';
+import { logout } from '../../redux/actions';
 import styles from './SideBar.module.scss';
 
 const SideBar = () => {
@@ -20,8 +20,8 @@ const SideBar = () => {
 
       if (!(signOutResponse instanceof Error)) {
         sessionStorage.clear();
-        history.push('/');
-        dispatch(resetStore());
+        dispatch(logout());
+        history.push('/'); // still push after logout action?
       }
     }
   };
