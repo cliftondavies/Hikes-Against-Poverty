@@ -1,13 +1,14 @@
 import {
   BrowserRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import SideBar from '../SideBar/SideBar';
 import Home from '../Home/Home';
 import Hikes from '../Hikes/Hikes';
 import Bookings from '../Bookings/Bookings';
 
 const App = () => {
-  const loggedIn = JSON.parse(sessionStorage.getItem('user'));
+  const loggedIn = useSelector((state) => state.authenticated);
 
   return (
     <BrowserRouter>
