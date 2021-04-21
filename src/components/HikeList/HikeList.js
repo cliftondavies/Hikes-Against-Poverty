@@ -31,7 +31,7 @@ const HikeList = ({ hikes }) => {
 };
 
 HikeList.propTypes = {
-  hikes: PropTypes.objectOf(PropTypes.any).isRequired,
+  hikes: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 export default HikeList;
