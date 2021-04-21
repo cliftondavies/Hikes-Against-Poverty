@@ -17,14 +17,14 @@ export const logout = () => (
   }
 );
 
-export const loadHikes = ({ hikes }) => (
+export const loadHikes = (hikes) => (
   {
     type: LOAD_HIKES,
     payload: { hikes },
   }
 );
 
-export const loadBookings = ({ bookings }) => (
+export const loadBookings = (bookings) => (
   {
     type: LOAD_BOOKINGS,
     payload: { bookings },
