@@ -13,6 +13,7 @@ const BookingList = () => {
     for (let i = 0; i < difference; i += 1) {
       result.push(<BookingCard key={i} />);
     }
+    return result;
   };
 
   useEffect(() => {
@@ -21,6 +22,7 @@ const BookingList = () => {
       const {
         accessToken, uid, client, tokenType, expiry,
       } = storedResponse.authentication;
+
       dispatch(userBookings({
         accessToken, uid, client, tokenType, expiry,
       }));
@@ -31,7 +33,8 @@ const BookingList = () => {
     <div>
       {(bookings && bookings.length > 0) ? bookings.map((booking) => (
         <BookingCard booking={booking} key={booking.id} />
-      )) : <span>{error}</span>}
+      )) : null}
+      {(error) ? <span>{error}</span> : null}
       {(extraBookingCards > 0) ? padBookings(extraBookingCards) : null}
     </div>
   );
