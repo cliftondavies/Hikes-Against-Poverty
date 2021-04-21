@@ -44,7 +44,7 @@ const SignInForm = ({ active }) => {
         <br />
 
         <label htmlFor="password">
-          <input type="password" id="password" name="password" onChange={handleChange} value={user.email} placeholder="Your Password" required />
+          <input type="password" id="password" name="password" onChange={handleChange} value={user.password} placeholder="Your Password" required />
         </label>
         <br />
 
