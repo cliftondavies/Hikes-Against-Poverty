@@ -30,7 +30,10 @@ BookingCard.defaultProps = {
 };
 
 BookingCard.propTypes = {
-  booking: PropTypes.objectOf(PropTypes.any),
+  booking: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.objectOf(PropTypes.any),
+  ]),
 };
 
 export default BookingCard;
