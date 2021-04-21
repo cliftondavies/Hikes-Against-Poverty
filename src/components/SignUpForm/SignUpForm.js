@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { signUp } from '../../api/api';
-import styles from './SignInForm.module.scss';
+import styles from './SignUpForm.module.scss';
 
 const SignUpForm = ({ active }) => {
   const [user, setUser] = useState({ name: '', email: '', password: '' });
