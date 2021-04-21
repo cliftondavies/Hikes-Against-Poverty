@@ -32,8 +32,8 @@ const SideBar = () => {
         <nav>
           <Link to="/hikes">HIKES</Link>
           <Link to="/bookings">BOOKINGS</Link>
-          <Link to="/shop">SHOP</Link>
-          <Link to="/virtual">VIRTUAL TOUR</Link>
+          <button type="button">SHOP</button>
+          <button type="button">VIRTUAL TOUR</button>
         </nav>
       </div>
 

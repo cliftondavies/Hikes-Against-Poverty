@@ -11,8 +11,8 @@ const Hikes = () => {
     <Switch>
       <Route exact path={path}>
         <main>
-          <div><span role="img" aria-label="play forward">▶️ &#9657;</span></div>
-          <div><span role="img" aria-label="play backward">◀️ &#9667;</span></div>
+          <div><span>&#9657;</span></div>
+          <div><span>&#9667;</span></div>
 
           <h2>AVAILABLE HIKES</h2>
 
