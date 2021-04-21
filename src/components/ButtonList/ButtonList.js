@@ -7,8 +7,8 @@ const ButtonList = ({ buttonType, clickHandler }) => {
   };
 
   const renderButton = (value) => {
-    if (buttonType === 'Sign Up') { return <Button buttonText={value} clickHandler={handleClick} active />; }
-    if (buttonType === 'Sign In') { return <Button buttonText={value} clickHandler={handleClick} active />; }
+    if (buttonType === 'Sign Up' && value === 'Sign Up') { return <Button buttonText={value} clickHandler={handleClick} active />; }
+    if (buttonType === 'Sign In' && value === 'Sign In') { return <Button buttonText={value} clickHandler={handleClick} active />; }
     return <Button buttonText={value} clickHandler={handleClick} />;
   };
 
