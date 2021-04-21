@@ -29,9 +29,9 @@ const SignInForm = ({ active }) => {
 
     if (!(signInResponse instanceof Error)) {
       sessionStorage.setItem('user', JSON.stringify(signInResponse));
+      setUser({ email: '', password: '' });
       dispatch(login());
       history.push('/hikes'); // still push after login action?
-      setUser({ email: '', password: '' });
     }
   };
 

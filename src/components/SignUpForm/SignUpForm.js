@@ -32,9 +32,9 @@ const SignUpForm = ({ active }) => {
 
     if (!(signUpResponse instanceof Error)) {
       sessionStorage.setItem('user', JSON.stringify(signUpResponse));
+      setUser({ name: '', email: '', password: '' });
       dispatch(login());
       history.push('/hikes'); // still push after login action?
-      setUser({ name: '', email: '', password: '' });
     }
   };
 
