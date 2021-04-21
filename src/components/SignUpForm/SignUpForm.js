@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { signUp } from '../../api/api';
 import { login } from '../../redux/actions';
@@ -9,7 +8,6 @@ import styles from './SignUpForm.module.scss';
 const SignUpForm = ({ active }) => {
   const [user, setUser] = useState({ name: '', email: '', password: '' });
   const dispatch = useDispatch();
-  const history = useHistory();
   const formClass = (active) ? styles.active : styles.inactive;
 
   const handleChange = (e) => {
@@ -34,7 +32,6 @@ const SignUpForm = ({ active }) => {
       sessionStorage.setItem('user', JSON.stringify(signUpResponse));
       setUser({ name: '', email: '', password: '' });
       dispatch(login());
-      history.push('/hikes'); // still push after login action?
     }
   };
 

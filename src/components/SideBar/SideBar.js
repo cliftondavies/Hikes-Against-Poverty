@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { Link, useLocation, useHistory } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { signOut } from '../../api/api';
 import { logout } from '../../redux/actions';
 import styles from './SideBar.module.scss';
@@ -7,7 +7,6 @@ import styles from './SideBar.module.scss';
 const SideBar = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const history = useHistory();
   let sideBarStyle = styles.showSideBar;
 
   if (location.pathname === '/') { sideBarStyle = styles.hideSideBar; }
@@ -21,7 +20,6 @@ const SideBar = () => {
       if (!(signOutResponse instanceof Error)) {
         sessionStorage.clear();
         dispatch(logout());
-        history.push('/'); // still push after logout action?
       }
     }
   };
