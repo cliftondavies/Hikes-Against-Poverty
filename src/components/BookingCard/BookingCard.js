@@ -8,7 +8,7 @@ const BookingCard = ({ booking }) => {
   const articleInfo = () => (
     <article>
       <h3>Type</h3>
-      <span>{hike.name}</span>
+      <span>{hike ? hike.name : null}</span>
       <h3>Date</h3>
       <span>{date}</span>
       <h3>Location</h3>
