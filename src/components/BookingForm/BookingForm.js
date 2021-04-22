@@ -7,6 +7,7 @@ import styles from './BookingForm.module.scss';
 
 const BookingForm = ({ active }) => {
   const [booking, setBooking] = useState({ date: '', city: '' });
+  const [style, setStyle] = useState(null);
   const dispatch = useDispatch();
   let { hikeID } = useParams();
   const CITIES = ['London', 'Glasgow', 'Cardiff', 'Belfast'];
@@ -33,15 +34,18 @@ const BookingForm = ({ active }) => {
       const {
         accessToken, uid, client, tokenType, expiry,
       } = storedResponse.authentication;
+
       dispatch(book(hikeID, bookingParams, {
         accessToken, uid, client, tokenType, expiry,
       }));
+
       setBooking({ date: '', city: '' });
+      setStyle(styles.inactive);
     }
   };
 
   return (
-    <div className={formClass}>
+    <div className={style || formClass}>
       <h3>
         BOOK A HIKE
       </h3>
