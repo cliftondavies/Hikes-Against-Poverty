@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import BookingCard from '../BookingCard/BookingCard';
-import { userBookings } from '../../api/api';
+import { userBookings, getHikes } from '../../api/api';
 
 const BookingList = () => {
   const { bookings, loading, error } = useSelector((state) => state.bookings);
@@ -24,6 +24,9 @@ const BookingList = () => {
       } = storedResponse.authentication;
 
       dispatch(userBookings({
+        accessToken, uid, client, tokenType, expiry,
+      }));
+      dispatch(getHikes({
         accessToken, uid, client, tokenType, expiry,
       }));
     }
