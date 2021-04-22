@@ -5,7 +5,7 @@ import { signIn } from '../../api/api';
 import { login } from '../../redux/actions';
 import styles from './SignInForm.module.scss';
 
-const SignInForm = ({ active }) => {
+const SignInForm = ({ active, formHandler }) => {
   const [user, setUser] = useState({ email: '', password: '' });
   const dispatch = useDispatch();
   const formClass = (active) ? styles.active : styles.inactive;
@@ -20,12 +20,15 @@ const SignInForm = ({ active }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    formHandler(true);
 
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const signInResponse = await signIn({ email, password });
 
-    if (!(signInResponse instanceof Error)) {
+    if (signInResponse instanceof Error) {
+      formHandler(false);
+    } else {
       sessionStorage.setItem('user', JSON.stringify(signInResponse));
       setUser({ email: '', password: '' });
       dispatch(login());
@@ -57,6 +60,7 @@ const SignInForm = ({ active }) => {
 
 SignInForm.propTypes = {
   active: PropTypes.bool.isRequired,
+  formHandler: PropTypes.func.isRequired,
 };
 
 export default SignInForm;

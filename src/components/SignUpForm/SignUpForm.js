@@ -5,7 +5,7 @@ import { signUp } from '../../api/api';
 import { login } from '../../redux/actions';
 import styles from './SignUpForm.module.scss';
 
-const SignUpForm = ({ active }) => {
+const SignUpForm = ({ active, formHandler }) => {
   const [user, setUser] = useState({ name: '', email: '', password: '' });
   const dispatch = useDispatch();
   const formClass = (active) ? styles.active : styles.inactive;
@@ -22,13 +22,16 @@ const SignUpForm = ({ active }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    formHandler(true);
 
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const signUpResponse = await signUp({ name, email, password });
 
-    if (!(signUpResponse instanceof Error)) {
+    if (signUpResponse instanceof Error) {
+      formHandler(false);
+    } else {
       sessionStorage.setItem('user', JSON.stringify(signUpResponse));
       setUser({ name: '', email: '', password: '' });
       dispatch(login());
@@ -65,6 +68,7 @@ const SignUpForm = ({ active }) => {
 
 SignUpForm.propTypes = {
   active: PropTypes.bool.isRequired,
+  formHandler: PropTypes.func.isRequired,
 };
 
 export default SignUpForm;
