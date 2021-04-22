@@ -17,7 +17,10 @@ Form.defaultProps = {
 Form.propTypes = {
   formType: PropTypes.string.isRequired,
   status: PropTypes.bool.isRequired,
-  formHandler: PropTypes.func,
+  formHandler: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.func,
+  ]),
 };
 
 export default Form;
