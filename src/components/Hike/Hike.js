@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getHikes } from '../../api/api';
 import Button from '../Button/Button';
@@ -8,11 +8,15 @@ import Form from '../Form/Form';
 
 const Hike = ({ hike }) => {
   const [button, setStatus] = useState({ status: false });
-  const { hikes, loading } = useSelector((state) => state.hikes);
+  const { loading } = useSelector((state) => state.hikes);
   const dispatch = useDispatch();
-  const { hikeID } = useParams();
-  const newHike = hikes.find((hike) => hike.id === Number(hikeID));
-  const { name, main_image: image } = hike || newHike;
+  let name;
+  let image;
+
+  if (hike) {
+    name = hike.name;
+    image = hike.main_image;
+  }
 
   useEffect(() => {
     if (loading === 'idle' && JSON.parse(sessionStorage.getItem('user'))) {
@@ -73,8 +77,12 @@ const Hike = ({ hike }) => {
   );
 };
 
+Hike.defaultProps = {
+  hike: undefined,
+};
+
 Hike.propTypes = {
-  hike: PropTypes.objectOf(PropTypes.any).isRequired,
+  hike: PropTypes.objectOf(PropTypes.any),
 };
 
 export default Hike;
