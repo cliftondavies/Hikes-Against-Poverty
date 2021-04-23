@@ -71,18 +71,3 @@ export const bookings = (state = bookingsInitialState, action) => {
 };
 
 export default combineReducers({ authenticated, hikes, bookings });
-// const appReducer = combineReducers({ hikes, bookings });
-
-// const rootReducer = (state, action) => {
-//   let newState;
-
-//   if (action.type === RESET_STORE) {
-//     // state = undefined;
-//     newState = state;
-//     newState = undefined;
-//   }
-
-//   return appReducer(newState, action);
-// };
-
-// export default rootReducer;
