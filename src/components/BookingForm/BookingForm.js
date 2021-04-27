@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import { book } from '../../api/api';
 import styles from './BookingForm.module.scss';
 
-const BookingForm = ({ active }) => {
+const BookingForm = ({ active, style }) => {
   const [booking, setBooking] = useState({ date: '', city: '' });
-  const [style, setStyle] = useState(null);
+  const [styyle, setStyle] = useState(null);
   const dispatch = useDispatch();
   let { hikeID } = useParams();
   const CITIES = ['London', 'Glasgow', 'Cardiff', 'Belfast'];
@@ -45,12 +45,8 @@ const BookingForm = ({ active }) => {
   };
 
   return (
-    <div className={style || formClass}>
-      <h3>
-        BOOK A HIKE
-      </h3>
-
-      <form onSubmit={handleSubmit}>
+    <div className={`${style} ${styyle || formClass}`}>
+      <form onSubmit={handleSubmit} className={styles.bookingForm}>
         <label htmlFor="date">
           <input type="date" id="date" name="date" onChange={handleChange} value={booking.date} required />
         </label>
@@ -67,7 +63,7 @@ const BookingForm = ({ active }) => {
         </label>
         <br />
 
-        <input type="submit" value="BOOK A HIKE" />
+        <input type="submit" value="BOOK" />
       </form>
     </div>
   );
@@ -75,6 +71,7 @@ const BookingForm = ({ active }) => {
 
 BookingForm.propTypes = {
   active: PropTypes.bool.isRequired,
+  style: PropTypes.string.isRequired,
 };
 
 export default BookingForm;
