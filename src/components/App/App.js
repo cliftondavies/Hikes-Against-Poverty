@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
-  BrowserRouter, Switch, Route, Redirect,
+  HashRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../../redux/actions';
@@ -25,7 +25,7 @@ const App = () => {
   }, [loggedIn]);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <SideBar />
       <Switch>
         <Route exact path="/">
@@ -39,7 +39,7 @@ const App = () => {
         </Route>
         <Route render={() => <h1>404: Page Not Found!</h1>} />
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
