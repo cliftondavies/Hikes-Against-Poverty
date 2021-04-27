@@ -9,7 +9,7 @@ const HikeCard = ({ hike }) => {
   const { id, name, thumbnail_image: thumbnail } = hike;
   const description = {
     Coast: 'The coast hike is approximately 10 miles long with stunning views of white cliffs and black sand.',
-    Fjord: 'This hike follows a meandering path along the fjord with opportunities to spot whales along the way',
+    Fjord: 'This hike follows a meandering path along the fjord with opportunities to spot whales along the way.',
     Mountain: 'The mountain hike features an ascent of 1000 meters with plenty of wildlife on display.',
   };
 
@@ -18,7 +18,7 @@ const HikeCard = ({ hike }) => {
       <div>
         <Link to={`hikes/${id}`} />
 
-        <img src={thumbnail} width="200" height="200" alt="thumbnail" />
+        <img src={thumbnail} width="180" height="180" alt="thumbnail" />
 
         <h3>{name}</h3>
 
@@ -26,9 +26,9 @@ const HikeCard = ({ hike }) => {
       </div>
 
       <div>
-        <img src={facebook} width="20" height="20" alt="facebook-logo" />
-        <img src={google} width="20" height="20" alt="google-logo" />
-        <img src={twitter} width="20" height="20" alt="twitter-logo" />
+        <img src={facebook} width="23" height="23" alt="facebook-logo" />
+        <img src={google} width="23" height="23" alt="google-logo" />
+        <img src={twitter} width="23" height="23" alt="twitter-logo" />
       </div>
     </article>
   );
