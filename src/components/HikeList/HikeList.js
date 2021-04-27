@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getHikes } from '../../api/api';
 import HikeCard from '../HikeCard/HikeCard';
+import styles from './HikeList.module.scss';
 
 const HikeList = ({ hikes }) => {
   const { loading, error } = useSelector((state) => state.hikes);
@@ -22,7 +23,7 @@ const HikeList = ({ hikes }) => {
   }, [loading, dispatch]);
 
   return (
-    <div>
+    <div className={styles.hikeList}>
       {(hikes && hikes.length > 0) ? hikes.map((hike) => (
         <HikeCard hike={hike} key={hike.id} />
       )) : <span>{error}</span>}
