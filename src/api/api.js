@@ -157,7 +157,7 @@ export const book = (id, bookingParams, {
 
     const responseBody = await response.json();
 
-    if (getState().bookings.bookings) { dispatch(loadBookings(responseBody)); } // empty array null?
+    if (getState().bookings.bookings) { dispatch(loadBookings(responseBody)); }
   } catch (error) {
     dispatch(loadBookingError({ error: error.message }));
   }

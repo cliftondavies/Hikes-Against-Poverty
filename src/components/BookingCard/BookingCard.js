@@ -2,25 +2,25 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './BookingCard.module.scss';
 
-const articleBackground = (hikeName = '') => {
-  const plainBackgrounds = [styles.green, styles.yellow, styles.blue, styles.black, styles.pink,
-    styles.sky];
-
-  switch (hikeName) {
-    case 'Coast':
-      return styles.coast;
-    case 'Fjord':
-      return styles.fjord;
-    case 'Mountain':
-      return styles.mountain;
-    default:
-      return plainBackgrounds[Math.floor(Math.random() * plainBackgrounds.length)];
-  }
-};
-
 const BookingCard = ({ booking }) => {
   const { date, city, hike_id: id } = booking;
   const hike = useSelector((state) => state.hikes.hikes.find((hike) => hike.id === id));
+
+  const articleBackground = (hikeName = '') => {
+    const plainBackgrounds = [styles.green, styles.yellow, styles.blue, styles.black, styles.pink,
+      styles.sky];
+
+    switch (hikeName) {
+      case 'Coast':
+        return styles.coast;
+      case 'Fjord':
+        return styles.fjord;
+      case 'Mountain':
+        return styles.mountain;
+      default:
+        return plainBackgrounds[Math.floor(Math.random() * plainBackgrounds.length)];
+    }
+  };
 
   const articleInfo = () => (
     <article className={`${styles.bookingCard} ${articleBackground(hike ? hike.name : '')}`}>

@@ -4,18 +4,18 @@ import BookingCard from '../BookingCard/BookingCard';
 import { userBookings, getHikes } from '../../api/api';
 import styles from './BookingList.module.scss';
 
-const padBookings = (difference) => {
-  const result = [];
-  for (let i = 0; i < difference; i += 1) {
-    result.push(<BookingCard key={i} />);
-  }
-  return result;
-};
-
 const BookingList = () => {
   const { bookings, loading, error } = useSelector((state) => state.bookings);
   const dispatch = useDispatch();
   const extraBookingCards = 9 - bookings.length;
+
+  const padBookings = (difference) => {
+    const result = [];
+    for (let i = 0; i < difference; i += 1) {
+      result.push(<BookingCard key={i} />);
+    }
+    return result;
+  };
 
   useEffect(() => {
     if (loading === 'idle' && JSON.parse(sessionStorage.getItem('user'))) {
