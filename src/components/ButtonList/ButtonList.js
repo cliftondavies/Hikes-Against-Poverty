@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
+import styles from './ButtonList.module.scss';
 
 const ButtonList = ({ buttonType, clickHandler }) => {
   const handleClick = (buttonText) => {
@@ -13,7 +14,7 @@ const ButtonList = ({ buttonType, clickHandler }) => {
   };
 
   return (
-    <div>
+    <div className={styles.buttonList}>
       {renderButton('Sign Up')}
       {renderButton('Sign In')}
     </div>
