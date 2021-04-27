@@ -2,6 +2,7 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import HikeList from '../HikeList/HikeList';
 import Hike from '../Hike/Hike';
+import styles from './Hikes.module.scss';
 
 const Hikes = () => {
   const { path } = useRouteMatch();
@@ -10,9 +11,9 @@ const Hikes = () => {
   return (
     <Switch>
       <Route exact path={path}>
-        <main>
-          <div><span>&#9657;</span></div>
-          <div><span>&#9667;</span></div>
+        <main className={styles.hikes}>
+          <span>&#9657;</span>
+          <span>&#9667;</span>
 
           <h2>AVAILABLE HIKES</h2>
 
