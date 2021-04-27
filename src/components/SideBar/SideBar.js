@@ -8,8 +8,12 @@ const SideBar = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   let sideBarStyle = styles.showSideBar;
+  let hikeLinkStyle;
+  let bookingLinkStyle;
 
   if (location.pathname === '/') { sideBarStyle = styles.hideSideBar; }
+  if (location.pathname.includes('/hikes')) { hikeLinkStyle = styles.activePage; }
+  if (location.pathname === '/bookings') { bookingLinkStyle = styles.activePage; }
 
   const handleClick = async () => {
     if (JSON.parse(sessionStorage.getItem('user'))) {
@@ -27,11 +31,11 @@ const SideBar = () => {
   return (
     <section className={sideBarStyle}>
       <div>
-        <span>Hikes Against Poverty</span>
+        <Link to="/hikes" className={styles.logo}>Hikes Against Poverty</Link>
 
         <nav>
-          <Link to="/hikes">HIKES</Link>
-          <Link to="/bookings">BOOKINGS</Link>
+          <Link to="/hikes" className={hikeLinkStyle}>HIKES</Link>
+          <Link to="/bookings" className={bookingLinkStyle}>BOOKINGS</Link>
           <button type="button">SHOP</button>
           <button type="button">VIRTUAL TOUR</button>
         </nav>

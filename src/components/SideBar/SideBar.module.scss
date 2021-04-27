@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+$mvp-green: #97bf0f;
+
+.showSideBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 3px solid #f1f1f1;
+  padding: 23px 0 20px 10px;
+  width: 16%;
+  background: #fff;
+}
+
+.showSideBar > div:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 45%;
+}
+
+.logo {
+  font: 700 22px/1 "Dancing Script", cursive;
+  text-align: center;
+  text-decoration: none;
+  transform: rotate(-10deg);
+  color: #000;
+}
+
+.logo:after {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid #000;
+  width: 50%;
+  content: '';
+}
+
+.showSideBar nav a,
+.showSideBar nav button {
+  display: block;
+  padding: 12px 15px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+}
+
+.showSideBar .activePage {
+  background: $mvp-green;
+  color: #fff;
+}
+
+.showSideBar nav button {
+  border: none;
+  width: 100%;
+  text-align: left;
+  background: none;
+}
+
+.showSideBar > div:last-child {
+  padding-left: 15px;
+}
+
+.showSideBar > div:last-child button {
+  margin-bottom: 20px;
+  border: 1px solid #000;
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  background: #f1f1f1;
+  cursor: pointer;
+}
+
+.showSideBar > div:last-child button:hover {
+  border: none;
+  background: $mvp-green;
+  color: #fff;
+}
+
+.showSideBar > div:last-child div {
+  margin-bottom: 15px;
+}
+
+.showSideBar i {
+  margin-right: 10px;
+  font-size: 15px;
+}
+
+.showSideBar > div:last-child span {
+  font-size: 9px;
+  font-weight: 500;
+}
+
+.hideSideBar {
+  display: none;
+}
