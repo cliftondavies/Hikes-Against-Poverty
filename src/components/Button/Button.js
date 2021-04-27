@@ -2,14 +2,17 @@ import PropTypes from 'prop-types';
 import styles from './Button.module.scss';
 
 const Button = ({ buttonText, clickHandler, active }) => {
-  const buttonClass = (active) ? styles.active : styles.inactive;
+  let buttonClass;
+  if (!active) { buttonClass = styles.inactive; }
+  if (active) { buttonClass = styles.active; }
+  if (buttonText === 'Book A Hike') { buttonClass = styles.bookingBtn; }
 
   const handleClick = (e) => {
     clickHandler(e.target.textContent);
   };
 
   return (
-    <button type="button" onClick={handleClick} className={buttonClass}>
+    <button type="button" onClick={handleClick} className={`${styles.btn} ${buttonClass}`}>
       {buttonText}
     </button>
   );
