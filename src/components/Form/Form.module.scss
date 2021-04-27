@@ -1,0 +1,47 @@
+$mvp-green: #97bf0f;
+
+.form label {
+  display: block;
+  margin-bottom: 1px;
+}
+
+.form input[type="email"],
+.form input[type="text"],
+.form input[type="password"],
+.form input[type="date"],
+select {
+  border: none;
+  border-radius: 15px 0 15px 0;
+  border-bottom: 3px solid $mvp-green;
+  outline: none;
+  padding: 10px 5px;
+  width: 50%;
+  font-size: 15px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.8);
+  transition: 0.2s ease-out;
+}
+
+.form input[type="date"],
+select {
+  width: 100%;
+}
+
+.form input:focus { background: rgba(255, 255, 255, 1); }
+
+.form input[type="submit"] {
+  border-radius: 15px;
+  border: 1px solid #fff;
+  width: 50%;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 0;
+  letter-spacing: 1px;
+  background: $mvp-green;
+  color: #fff;
+  cursor: pointer;
+}
+
+.form input[type="submit"]:hover {
+  background: darken($mvp-green, 5%);
+}
