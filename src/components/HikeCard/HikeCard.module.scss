@@ -26,12 +26,12 @@
   text-transform: uppercase;
 }
 
-.hikeCard h3:after {
+.hikeCard h3::after {
   display: block;
   margin: 18px auto;
   border: 1px dotted lightgrey;
   width: 30%;
-  content: ''
+  content: '';
 }
 
 .hikeCard p {

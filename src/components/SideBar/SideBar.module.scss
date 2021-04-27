@@ -27,7 +27,7 @@ $mvp-green: #97bf0f;
   color: #000;
 }
 
-.logo:after {
+.logo::after {
   display: block;
   margin: 0 auto;
   border: 1px solid #000;

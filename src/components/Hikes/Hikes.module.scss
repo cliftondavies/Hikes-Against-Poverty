@@ -48,10 +48,10 @@
   color: lightgrey;
 }
 
-.hikes > span:nth-of-type(3):after {
+.hikes > span:nth-of-type(3)::after {
   display: block;
   margin: 30px auto;
   border: 1px dotted lightgrey;
   width: 10%;
-  content: ''
+  content: '';
 }

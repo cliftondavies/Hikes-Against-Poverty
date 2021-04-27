@@ -10,18 +10,6 @@
   width: 580px;
 }
 
-.hike section:first-child > span {
-  position: absolute;
-  bottom: 20px;
-  left: 0;
-  border-radius: 0 20px 20px 0;
-  padding: 15px 15px 15px 30px;
-  font-size: 16px;
-  font-weight: 700;
-  background: #97bf0f;
-  color: #fff;
-}
-
 .hike section:last-child {
   display: flex;
   flex: 1;
@@ -61,6 +49,18 @@
 .hike table + span {
   margin-bottom: 30px;
   font-size: 15px;
+}
+
+.hike section:first-child > span {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  border-radius: 0 20px 20px 0;
+  padding: 15px 15px 15px 30px;
+  font-size: 16px;
+  font-weight: 700;
+  background: #97bf0f;
+  color: #fff;
 }
 
 .hike strong {
