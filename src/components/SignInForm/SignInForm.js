@@ -5,7 +5,7 @@ import { signIn } from '../../api/api';
 import { login } from '../../redux/actions';
 import styles from './SignInForm.module.scss';
 
-const SignInForm = ({ active, formHandler }) => {
+const SignInForm = ({ active, formHandler, style }) => {
   const [user, setUser] = useState({ email: '', password: '' });
   const dispatch = useDispatch();
   const formClass = (active) ? styles.active : styles.inactive;
@@ -24,23 +24,19 @@ const SignInForm = ({ active, formHandler }) => {
 
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    setUser({ email: '', password: '' });
     const signInResponse = await signIn({ email, password });
 
     if (signInResponse instanceof Error) {
       formHandler(false);
     } else {
       sessionStorage.setItem('user', JSON.stringify(signInResponse));
-      setUser({ email: '', password: '' });
       dispatch(login());
     }
   };
 
   return (
-    <div className={formClass}>
-      <h3>
-        SIGN IN
-      </h3>
-
+    <div className={`${style} ${formClass}`}>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">
           <input type="email" id="email" name="email" onChange={handleChange} value={user.email} placeholder="Your Email" required />
@@ -61,6 +57,7 @@ const SignInForm = ({ active, formHandler }) => {
 SignInForm.propTypes = {
   active: PropTypes.bool.isRequired,
   formHandler: PropTypes.func.isRequired,
+  style: PropTypes.string.isRequired,
 };
 
 export default SignInForm;

@@ -5,7 +5,7 @@ import { signUp } from '../../api/api';
 import { login } from '../../redux/actions';
 import styles from './SignUpForm.module.scss';
 
-const SignUpForm = ({ active, formHandler }) => {
+const SignUpForm = ({ active, formHandler, style }) => {
   const [user, setUser] = useState({ name: '', email: '', password: '' });
   const dispatch = useDispatch();
   const formClass = (active) ? styles.active : styles.inactive;
@@ -27,26 +27,22 @@ const SignUpForm = ({ active, formHandler }) => {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    setUser({ name: '', email: '', password: '' });
     const signUpResponse = await signUp({ name, email, password });
 
     if (signUpResponse instanceof Error) {
       formHandler(false);
     } else {
       sessionStorage.setItem('user', JSON.stringify(signUpResponse));
-      setUser({ name: '', email: '', password: '' });
       dispatch(login());
     }
   };
 
   return (
-    <div className={formClass}>
-      <h3>
-        SIGN UP
-      </h3>
-
+    <div className={`${style} ${formClass}`}>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">
-          <input id="name" name="name" onChange={handleChange} value={user.name} placeholder="Your Name" required />
+          <input type="text" id="name" name="name" onChange={handleChange} value={user.name} placeholder="Your Name" required />
         </label>
         <br />
 
@@ -69,6 +65,7 @@ const SignUpForm = ({ active, formHandler }) => {
 SignUpForm.propTypes = {
   active: PropTypes.bool.isRequired,
   formHandler: PropTypes.func.isRequired,
+  style: PropTypes.string.isRequired,
 };
 
 export default SignUpForm;
