@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { getHikes } from '../../api/api';
 import Button from '../Button/Button';
 import Form from '../Form/Form';
+import styles from './Hike.module.scss';
 
 const Hike = ({ hike }) => {
   const [button, setStatus] = useState({ status: false });
@@ -45,27 +46,30 @@ const Hike = ({ hike }) => {
   };
 
   return (
-    <main>
+    <main className={styles.hike}>
       <section>
-        <img src={image} width="600" height="600" alt="main" />
+        <img src={image} width="580" height="660" alt="main" />
 
-        <div><span>&#9667;</span></div>
+        <span>&#9667;</span>
       </section>
       <section>
         <h2>{name}</h2>
 
-        <span>- optional costs available to any booking</span>
+        <span>- optional booking fees</span>
 
         <table>
           <tbody>
             {tableRow('Travel fee', '£20')}
             {tableRow('Meal fee', '£10')}
             {tableRow('Gear fee', '£10')}
-            {tableRow('Total amount payabke', '£40')}
+            {tableRow('Total amount payable', '£40')}
           </tbody>
         </table>
 
-        <span>100% of fees are donated</span>
+        <span>
+          <strong>100%</strong>
+          {' of fees are donated'}
+        </span>
 
         <Link to="/hikes">SEE MORE HIKES &#8250;</Link>
 
