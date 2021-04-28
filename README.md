@@ -1,70 +1,119 @@
-# Getting Started with Create React App
+[![Netlify Status](https://api.netlify.com/api/v1/badges/eed9d880-8a45-4a07-8a01-a3bde35127e2/deploy-status)](https://app.netlify.com/sites/h-a-p/deploys)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![Open Source Love png1](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
+![Tweeting](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Hikes Against Poverty (HAP)
 
-## Available Scripts
+> There are over a million people living in poverty in the UK. HAP is on a mission to raise funds for charities fighting against poverty, through daily hike events. HAP is built on top of the [HAP API](https://github.com/cliftondavies/HAP-API).
 
-In the project directory, you can run:
+![screenshot](hap.png)
 
-### `npm start`
+## :tv: Media
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[Live Demo Link](https://h-a-p.netlify.app/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## MVP Features
 
-### `npm test`
+This MVP persists the app state after a browser refresh, and allows a user to:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Before Authentication:
+  - View the Home page
+  - Sign Up with a valid name, email and password
+  - Sign In with a valid email and password
+- After Authentication:
+  - View a list of all hikes available on the Hikes page
+  - View a list of their bookings on the Bookings page
+  - View details about a particular hike on the Hike page
+  - Book an event for a specific hike, with a valid date and location
+  - Sign Out
 
-### `npm run build`
+## :toolbox: Tools & Technologies Used
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Built with
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- HTML5
+- CSS3
+- SCSS
+- JavaScript ES6
+- React 17.0.2
+- Redux >4.0.5
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## :rocket: Getting Started
 
-### `npm run eject`
+To get a local copy up and running follow these simple example steps.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Prerequisites
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Install [npm](https://www.npmjs.com/get-npm) or [Yarn](https://yarnpkg.com/cli/install)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Install [Node.js](https://nodejs.org/en/download/)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Set up
 
-## Learn More
+Clone repo into your local environment:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Clone with SSH
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```git
+git clone git@github.com:cliftondavies/Hikes-Against-Poverty.git
+```
 
-### Code Splitting
+Clone with HTTPS
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```git
+git clone https://github.com/cliftondavies/Hikes-Against-Poverty.git
+```
 
-### Analyzing the Bundle Size
+Open project directory
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+cd [your-directory-name]
+```
 
-### Making a Progressive Web App
+Install packages:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```javascript
+npm install
+```
 
-### Advanced Configuration
+### Local Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+#### In console
 
-### Deployment
+```javascript
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+#### In Browser
 
-### `npm run build` fails to minify
+Visit `http://localhost:3000/`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Author
+
+👤 **Clifton Davies**
+
+- Github: [@githubhandle](https://github.com/cliftondavies)
+- Twitter: [@twitterhandle](https://twitter.com/cliftonaedavies)
+- Linkedin: [linkedin](https://www.linkedin.com/in/clifton-davies-mbcs/)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Acknowledgements
+
+- [create-react-app](https://github.com/facebook/create-react-app)
+- [Design inspiration](https://www.behance.net/gallery/26425031/Vespa-Responsive-Redesign)
+- [Photos](https://picsum.photos/)
+- [Icons](https://iconmonstr.com/)
+- [Colors](https://chrome.google.com/webstore/detail/colorpick-eyedropper/ohcpnigalekghcmgcdcenkpelffpdolg?hl=en)
+
+## 📝 Copyright & License
+
+Copyright (c) 2021 Clifton Davies. This project is licensed under [MIT](https://opensource.org/licenses/MIT). See LICENSE file for details.
