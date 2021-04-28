@@ -1,17 +1,34 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { book } from '../../api/api';
+import { userBookings, book } from '../../api/api';
 import styles from './BookingForm.module.scss';
 
 const BookingForm = ({ active, style }) => {
+  const { bookings, loading } = useSelector((state) => state.bookings);
   const [booking, setBooking] = useState({ date: '', city: '' });
   const [styyle, setStyle] = useState(null);
+  const [doubleBooking, setdoubleBooking] = useState(false);
+  const history = useHistory();
   const dispatch = useDispatch();
   let { hikeID } = useParams();
   const CITIES = ['London', 'Glasgow', 'Cardiff', 'Belfast'];
   const formClass = (active) ? styles.active : styles.inactive;
+  const spanClass = (doubleBooking) ? styles.dateConflict : styles.dateOkay;
+
+  useEffect(() => {
+    if (loading === 'idle' && JSON.parse(sessionStorage.getItem('user'))) {
+      const storedResponse = JSON.parse(sessionStorage.getItem('user'));
+      const {
+        accessToken, uid, client, tokenType, expiry,
+      } = storedResponse.authentication;
+
+      dispatch(userBookings({
+        accessToken, uid, client, tokenType, expiry,
+      }));
+    }
+  }, [loading, dispatch]);
 
   const handleChange = (e) => {
     if (e.target.id === 'date') {
@@ -26,35 +43,56 @@ const BookingForm = ({ active, style }) => {
 
     const date = document.getElementById('date').value;
     const city = document.getElementById('city').value;
-    hikeID = Number(hikeID);
-    const bookingParams = { date, city, hike_id: hikeID };
+    const dateMatch = bookings.find((booking) => date === booking.date);
 
-    if (JSON.parse(sessionStorage.getItem('user'))) {
-      const storedResponse = JSON.parse(sessionStorage.getItem('user'));
-      const {
-        accessToken, uid, client, tokenType, expiry,
-      } = storedResponse.authentication;
+    if (dateMatch) {
+      setdoubleBooking(true);
+      setTimeout(() => { setdoubleBooking(false); }, 3000);
+    } else {
+      hikeID = Number(hikeID);
+      const bookingParams = { date, city, hike_id: hikeID };
 
-      dispatch(book(hikeID, bookingParams, {
-        accessToken, uid, client, tokenType, expiry,
-      }));
+      if (JSON.parse(sessionStorage.getItem('user'))) {
+        const storedResponse = JSON.parse(sessionStorage.getItem('user'));
+        const {
+          accessToken, uid, client, tokenType, expiry,
+        } = storedResponse.authentication;
 
-      setBooking({ date: '', city: '' });
-      setStyle(styles.inactive);
+        dispatch(book(hikeID, bookingParams, {
+          accessToken, uid, client, tokenType, expiry,
+        }));
+
+        setBooking({ date: '', city: '' });
+        setStyle(styles.inactive);
+        history.push('/bookings');
+      }
     }
+  };
+
+  const formatDate = () => {
+    const date = new Date();
+    const MONTHS = ['01', '02', '03', '04', '05', '06', '07', '08',
+      '09', '10', '11', '12'];
+    let dateDigit = date.getDate();
+    if (dateDigit < 10) { dateDigit = `0${dateDigit}`; }
+    const month = MONTHS[date.getMonth()];
+    const year = date.getFullYear();
+    return `${year}-${month}-${dateDigit}`;
   };
 
   return (
     <div className={`${style} ${styyle || formClass}`}>
       <form onSubmit={handleSubmit} className={styles.bookingForm}>
         <label htmlFor="date">
-          <input type="date" id="date" name="date" onChange={handleChange} value={booking.date} required />
+          <span className={spanClass}>You already have a booking for this day!</span>
+
+          <input type="date" id="date" name="date" onChange={handleChange} value={booking.date} min={formatDate()} required />
         </label>
         <br />
 
         <label htmlFor="city">
-          <select name="city" id="city" value={booking.city || 'Choose a city'} onChange={handleChange} required>
-            <option value="Choose a city" disabled>Choose a city</option>
+          <select name="city" id="city" value={booking.city} onChange={handleChange} required>
+            <option value="" disabled>Choose a city</option>
             <option value={CITIES[0]}>{CITIES[0]}</option>
             <option value={CITIES[1]}>{CITIES[1]}</option>
             <option value={CITIES[2]}>{CITIES[2]}</option>
