@@ -11,13 +11,12 @@ const BookingForm = ({ active, style }) => {
   const [bookingDate, setBookingDate] = useState('');
   const [bookingCity, setBookingCity] = useState('');
   const [styyle, setStyle] = useState(null);
-  const [doubleBooking, setDoubleBooking] = useState(false);
+  const [bookingError, setBookingError] = useState(null);
   const history = useHistory();
   const dispatch = useDispatch();
   let { hikeID } = useParams();
   const CITIES = ['London', 'Glasgow', 'Cardiff', 'Belfast'];
   const formClass = (active) ? styles.active : styles.inactive;
-  const spanClass = (doubleBooking) ? styles.dateConflict : styles.dateOkay;
 
   useEffect(() => {
     if (bookingsLoading === 'idle' && JSON.parse(sessionStorage.getItem('user'))) {
@@ -48,8 +47,8 @@ const BookingForm = ({ active, style }) => {
     const dateMatch = bookings.find((booking) => date === booking.date);
 
     if (dateMatch) {
-      setDoubleBooking(true);
-      setTimeout(() => { setDoubleBooking(false); }, 3000);
+      setBookingError('You already have a booking for this day!');
+      setTimeout(() => { setBookingError(null); }, 3000);
     } else {
       hikeID = Number(hikeID);
       const bookingParams = { date, city, hike_id: hikeID };
@@ -87,7 +86,7 @@ const BookingForm = ({ active, style }) => {
     <div className={`${style} ${styyle || formClass}`}>
       <form onSubmit={handleSubmit} className={styles.bookingForm}>
         <label htmlFor="date">
-          <span className={spanClass}>You already have a booking for this day!</span>
+          <span>{bookingError}</span>
 
           <input type="date" id="date" name="date" onChange={handleChange} value={bookingDate} min={formatDate()} required />
         </label>
