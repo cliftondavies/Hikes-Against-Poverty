@@ -1,18 +1,19 @@
 import { combineReducers } from 'redux';
 import {
-  LOGIN, LOGOUT, LOAD_HIKES, LOAD_BOOKINGS, LOAD_HIKE_ERROR, LOAD_BOOKING_ERROR,
+  LOGIN, LOGOUT, LOAD_HIKES, LOAD_BOOKINGS, LOAD_ERROR,
 } from './actions';
 
 export const hikesInitialState = {
   hikes: [],
-  loading: 'idle',
-  error: null,
 };
 
 export const bookingsInitialState = {
   bookings: [],
-  loading: 'idle',
-  error: null,
+};
+
+export const loadingInitialState = {
+  hikesLoading: 'idle',
+  bookingsLoading: 'idle',
 };
 
 export const authenticated = (state = false, action) => {
@@ -32,14 +33,6 @@ export const hikes = (state = hikesInitialState, action) => {
       return {
         ...state,
         hikes: action.payload.hikes,
-        loading: 'completed',
-        error: null,
-      };
-    case LOAD_HIKE_ERROR:
-      return {
-        ...state,
-        loading: 'failed',
-        error: action.payload.error,
       };
     case LOGOUT:
       return hikesInitialState;
@@ -54,14 +47,6 @@ export const bookings = (state = bookingsInitialState, action) => {
       return {
         ...state,
         bookings: action.payload.bookings,
-        loading: 'completed',
-        error: null,
-      };
-    case LOAD_BOOKING_ERROR:
-      return {
-        ...state,
-        loading: 'failed',
-        error: action.payload.error,
       };
     case LOGOUT:
       return bookingsInitialState;
@@ -70,4 +55,35 @@ export const bookings = (state = bookingsInitialState, action) => {
   }
 };
 
-export default combineReducers({ authenticated, hikes, bookings });
+export const loading = (state = loadingInitialState, action) => {
+  switch (action.type) {
+    case LOAD_HIKES:
+      return {
+        ...state,
+        hikesLoading: 'completed',
+      };
+    case LOAD_BOOKINGS:
+      return {
+        ...state,
+        bookingsLoading: 'completed',
+      };
+    default:
+      return state;
+  }
+};
+
+export const error = (state = null, action) => {
+  switch (action.type) {
+    case LOAD_HIKES:
+    case LOAD_BOOKINGS:
+      return null;
+    case LOAD_ERROR:
+      return action.payload.error;
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({
+  authenticated, hikes, bookings, loading, error,
+});

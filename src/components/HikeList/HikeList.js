@@ -6,11 +6,12 @@ import HikeCard from '../HikeCard/HikeCard';
 import styles from './HikeList.module.scss';
 
 const HikeList = ({ hikes }) => {
-  const { loading, error } = useSelector((state) => state.hikes);
+  const { hikesLoading } = useSelector((state) => state.loading);
+  const error = useSelector((state) => state.error);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (loading === 'idle' && JSON.parse(sessionStorage.getItem('user'))) {
+    if (hikesLoading === 'idle' && JSON.parse(sessionStorage.getItem('user'))) {
       const storedResponse = JSON.parse(sessionStorage.getItem('user'));
       const {
         accessToken, uid, client, tokenType, expiry,
@@ -20,7 +21,7 @@ const HikeList = ({ hikes }) => {
         accessToken, uid, client, tokenType, expiry,
       }));
     }
-  }, [loading, dispatch]);
+  }, [hikesLoading, dispatch]);
 
   return (
     <div className={styles.hikeList}>

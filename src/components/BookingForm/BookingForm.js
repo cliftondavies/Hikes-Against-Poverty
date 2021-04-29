@@ -6,7 +6,8 @@ import { userBookings, book } from '../../api/api';
 import styles from './BookingForm.module.scss';
 
 const BookingForm = ({ active, style }) => {
-  const { bookings, loading } = useSelector((state) => state.bookings);
+  const { bookings } = useSelector((state) => state.bookings);
+  const { bookingsLoading } = useSelector((state) => state.loading);
   const [booking, setBooking] = useState({ date: '', city: '' });
   const [styyle, setStyle] = useState(null);
   const [doubleBooking, setdoubleBooking] = useState(false);
@@ -18,7 +19,7 @@ const BookingForm = ({ active, style }) => {
   const spanClass = (doubleBooking) ? styles.dateConflict : styles.dateOkay;
 
   useEffect(() => {
-    if (loading === 'idle' && JSON.parse(sessionStorage.getItem('user'))) {
+    if (bookingsLoading === 'idle' && JSON.parse(sessionStorage.getItem('user'))) {
       const storedResponse = JSON.parse(sessionStorage.getItem('user'));
       const {
         accessToken, uid, client, tokenType, expiry,
@@ -28,7 +29,7 @@ const BookingForm = ({ active, style }) => {
         accessToken, uid, client, tokenType, expiry,
       }));
     }
-  }, [loading, dispatch]);
+  }, [bookingsLoading, dispatch]);
 
   const handleChange = (e) => {
     if (e.target.id === 'date') {

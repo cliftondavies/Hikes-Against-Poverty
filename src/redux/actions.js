@@ -2,8 +2,7 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const LOAD_HIKES = 'LOAD_HIKES';
 export const LOAD_BOOKINGS = 'LOAD_BOOKINGS';
-export const LOAD_HIKE_ERROR = 'LOAD_ERROR';
-export const LOAD_BOOKING_ERROR = 'LOAD_BOOKING_ERROR';
+export const LOAD_ERROR = 'LOAD_ERROR';
 
 export const login = () => (
   {
@@ -31,16 +30,9 @@ export const loadBookings = (bookings) => (
   }
 );
 
-export const loadHikeError = ({ error }) => (
+export const loadError = ({ error }) => (
   {
-    type: LOAD_HIKE_ERROR,
-    payload: { error },
-  }
-);
-
-export const loadBookingError = ({ error }) => (
-  {
-    type: LOAD_BOOKING_ERROR,
+    type: LOAD_ERROR,
     payload: { error },
   }
 );

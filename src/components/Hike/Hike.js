@@ -9,7 +9,7 @@ import styles from './Hike.module.scss';
 
 const Hike = ({ hike }) => {
   const [button, setStatus] = useState({ status: false });
-  const { loading } = useSelector((state) => state.hikes);
+  const { hikesLoading } = useSelector((state) => state.loading);
   const dispatch = useDispatch();
   let name;
   let image;
@@ -20,7 +20,7 @@ const Hike = ({ hike }) => {
   }
 
   useEffect(() => {
-    if (loading === 'idle' && JSON.parse(sessionStorage.getItem('user'))) {
+    if (hikesLoading === 'idle' && JSON.parse(sessionStorage.getItem('user'))) {
       const storedResponse = JSON.parse(sessionStorage.getItem('user'));
       const {
         accessToken, uid, client, tokenType, expiry,
@@ -30,7 +30,7 @@ const Hike = ({ hike }) => {
         accessToken, uid, client, tokenType, expiry,
       }));
     }
-  }, [loading, dispatch]);
+  }, [hikesLoading, dispatch]);
 
   const tableRow = (feeType, price) => (
     <tr>

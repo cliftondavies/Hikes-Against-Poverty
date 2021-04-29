@@ -1,5 +1,5 @@
 import {
-  loadHikes, loadBookings, loadHikeError, loadBookingError,
+  loadHikes, loadBookings, loadError,
 } from '../redux/actions';
 
 export const getHikes = ({
@@ -21,9 +21,9 @@ export const getHikes = ({
 
     const responseBody = await response.json();
 
-    if (getState().hikes.loading === 'idle') { dispatch(loadHikes(responseBody)); }
+    if (getState().loading.hikesLoading === 'idle') { dispatch(loadHikes(responseBody)); }
   } catch (error) {
-    dispatch(loadHikeError({ error: error.message }));
+    dispatch(loadError({ error: error.message }));
   }
 };
 
@@ -47,9 +47,9 @@ export const userBookings = ({
 
     const responseBody = await response.json();
 
-    if (getState().bookings.loading === 'idle') { dispatch(loadBookings(responseBody)); }
+    if (getState().loading.bookingsLoading === 'idle') { dispatch(loadBookings(responseBody)); }
   } catch (error) {
-    dispatch(loadBookingError({ error: error.message }));
+    dispatch(loadError({ error: error.message }));
   }
 };
 
@@ -159,6 +159,6 @@ export const book = (id, bookingParams, {
 
     if (getState().bookings.bookings) { dispatch(loadBookings(responseBody)); }
   } catch (error) {
-    dispatch(loadBookingError({ error: error.message }));
+    dispatch(loadError({ error: error.message }));
   }
 };
