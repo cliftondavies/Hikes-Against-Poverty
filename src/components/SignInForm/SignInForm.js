@@ -1,16 +1,17 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { signIn } from '../../api/api';
-import { login } from '../../redux/actions';
+import { login, loadError } from '../../redux/actions';
 import styles from './SignInForm.module.scss';
 
 const SignInForm = ({ active, formHandler, style }) => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [loginError, setLoginError] = useState(null);
+  const error = useSelector((state) => state.error);
   const dispatch = useDispatch();
   const formClass = (active) ? styles.active : styles.inactive;
+  const errorMessage = (error) ? 'Invalid email or password! Please try again.' : null;
 
   const handleChange = (e) => {
     if (e.target.id === 'email') {
@@ -31,9 +32,8 @@ const SignInForm = ({ active, formHandler, style }) => {
     const signInResponse = await signIn({ email, password });
 
     if (signInResponse instanceof Error) {
-      setLoginError('Invalid email or password!');
-      setTimeout(() => { setLoginError(null); }, 3000);
       formHandler(false);
+      dispatch(loadError({ error: signInResponse.message }));
     } else {
       sessionStorage.setItem('user', JSON.stringify(signInResponse));
       dispatch(login());
@@ -43,9 +43,8 @@ const SignInForm = ({ active, formHandler, style }) => {
   return (
     <div className={`${style} ${formClass}`}>
       <form onSubmit={handleSubmit} className={styles.signInForm}>
-        <span>{loginError}</span>
-
         <label htmlFor="email">
+          <span>{errorMessage}</span>
           <input type="email" id="email" name="email" onChange={handleChange} value={userEmail} placeholder="Your Email" required />
         </label>
         <br />

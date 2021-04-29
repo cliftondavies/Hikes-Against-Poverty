@@ -76,13 +76,13 @@ export const loading = (state = loadingInitialState, action) => {
 
 export const error = (state = null, action) => {
   switch (action.type) {
+    case LOGIN:
     case LOAD_HIKES:
     case LOAD_BOOKINGS:
+    case LOGOUT:
       return null;
     case LOAD_ERROR:
       return action.payload.error;
-    case LOGOUT:
-      return null;
     default:
       return state;
   }
