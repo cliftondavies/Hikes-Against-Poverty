@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
-  HashRouter, Switch, Route, useRouteMatch, Redirect,
+  HashRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../../redux/actions';
@@ -12,7 +12,6 @@ import Bookings from '../Bookings/Bookings';
 
 const App = () => {
   const [session, setSession] = useState(JSON.parse(sessionStorage.getItem('user')));
-  const { path } = useRouteMatch();
   const loggedIn = useSelector((state) => state.authenticated);
   const { hikes } = useSelector((state) => state.hikes);
   const dispatch = useDispatch();
@@ -37,11 +36,11 @@ const App = () => {
         <Route path="/hikes">
           {(!loggedIn && !session) ? <Redirect to="/" /> : (
             <Switch>
-              <Route exact path={path}>
+              <Route exact path="/hikes">
                 <Hikes />
               </Route>
               <Route
-                path={`${path}/:hikeID`}
+                path="/hikes/:hikeID"
                 render={({ match }) => (
                   <Hike hike={hikes.find((hike) => hike.id === Number(match.params.hikeID))} />
                 )}
