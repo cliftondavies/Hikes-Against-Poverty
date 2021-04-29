@@ -67,6 +67,8 @@ export const loading = (state = loadingInitialState, action) => {
         ...state,
         bookingsLoading: 'completed',
       };
+    case LOGOUT:
+      return loadingInitialState;
     default:
       return state;
   }
@@ -79,6 +81,8 @@ export const error = (state = null, action) => {
       return null;
     case LOAD_ERROR:
       return action.payload.error;
+    case LOGOUT:
+      return null;
     default:
       return state;
   }
