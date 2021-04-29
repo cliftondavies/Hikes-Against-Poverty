@@ -8,6 +8,7 @@ import styles from './SignInForm.module.scss';
 const SignInForm = ({ active, formHandler, style }) => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const [loginError, setLoginError] = useState(null);
   const dispatch = useDispatch();
   const formClass = (active) ? styles.active : styles.inactive;
 
@@ -30,6 +31,8 @@ const SignInForm = ({ active, formHandler, style }) => {
     const signInResponse = await signIn({ email, password });
 
     if (signInResponse instanceof Error) {
+      setLoginError('Invalid email or password!');
+      setTimeout(() => { setLoginError(null); }, 3000);
       formHandler(false);
     } else {
       sessionStorage.setItem('user', JSON.stringify(signInResponse));
@@ -39,7 +42,9 @@ const SignInForm = ({ active, formHandler, style }) => {
 
   return (
     <div className={`${style} ${formClass}`}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.signInForm}>
+        <span>{loginError}</span>
+
         <label htmlFor="email">
           <input type="email" id="email" name="email" onChange={handleChange} value={userEmail} placeholder="Your Email" required />
         </label>
