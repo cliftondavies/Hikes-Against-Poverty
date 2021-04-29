@@ -5,19 +5,24 @@ import Form from '../Form/Form';
 import styles from './Home.module.scss';
 
 const Home = () => {
-  const [form, setForm] = useState({ type: '', status: false });
+  const [formType, setFormType] = useState('');
+  const [formStatus, setFormStatus] = useState(false);
   const [sent, setSent] = useState(false);
   const paragraph = 'There are over a million people living in poverty in the UK. Hikes Against Poverty is on a mission to raise funds for charities fighting against poverty in all its forms. We do this by organising daily hikes to breathtaking locations. 100% of all money raised from fees is donated to select charities.';
 
   const handleButtonClick = (buttonText) => {
-    if (buttonText === 'Sign Up' && form.type === 'Sign Up') {
-      setForm({ type: '', status: !form.status });
-    } else if (buttonText === 'Sign In' && form.type === 'Sign In') {
-      setForm({ type: '', status: !form.status });
+    if (buttonText === 'Sign Up' && formType === 'Sign Up') {
+      setFormType('');
+      setFormStatus(!formStatus);
+    } else if (buttonText === 'Sign In' && formType === 'Sign In') {
+      setFormType('');
+      setFormStatus(!formStatus);
     } else if (buttonText === 'Sign Up') {
-      setForm({ type: 'Sign Up', status: true });
+      setFormType('Sign Up');
+      setFormStatus(true);
     } else if (buttonText === 'Sign In') {
-      setForm({ type: 'Sign In', status: true });
+      setFormType('Sign In');
+      setFormStatus(true);
     }
   };
 
@@ -31,9 +36,9 @@ const Home = () => {
 
       <p>{paragraph}</p>
 
-      <ButtonList buttonType={form.type} clickHandler={handleButtonClick} />
+      <ButtonList buttonType={formType} clickHandler={handleButtonClick} />
 
-      <Form formType={form.type} status={form.status} formHandler={handleFormSubmit} />
+      <Form formType={formType} status={formStatus} formHandler={handleFormSubmit} />
     </div>
   );
 

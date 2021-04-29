@@ -6,17 +6,19 @@ import { login } from '../../redux/actions';
 import styles from './SignUpForm.module.scss';
 
 const SignUpForm = ({ active, formHandler, style }) => {
-  const [user, setUser] = useState({ name: '', email: '', password: '' });
+  const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
   const dispatch = useDispatch();
   const formClass = (active) ? styles.active : styles.inactive;
 
   const handleChange = (e) => {
     if (e.target.id === 'name') {
-      setUser({ name: e.target.value, email: user.email, password: user.password });
+      setUserName(e.target.value);
     } else if (e.target.id === 'email') {
-      setUser({ name: user.name, email: e.target.value, password: user.password });
+      setUserEmail(e.target.value);
     } else if (e.target.id === 'password') {
-      setUser({ name: user.name, email: user.email, password: e.target.value });
+      setUserPassword(e.target.value);
     }
   };
 
@@ -24,10 +26,12 @@ const SignUpForm = ({ active, formHandler, style }) => {
     e.preventDefault();
     formHandler(true);
 
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    setUser({ name: '', email: '', password: '' });
+    const name = userName;
+    const email = userEmail;
+    const password = userPassword;
+    setUserName('');
+    setUserEmail('');
+    setUserPassword('');
     const signUpResponse = await signUp({ name, email, password });
 
     if (signUpResponse instanceof Error) {
@@ -42,17 +46,17 @@ const SignUpForm = ({ active, formHandler, style }) => {
     <div className={`${style} ${formClass}`}>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">
-          <input type="text" id="name" name="name" onChange={handleChange} value={user.name} placeholder="Your Name" required />
+          <input type="text" id="name" name="name" onChange={handleChange} value={userName} placeholder="Your Name" required />
         </label>
         <br />
 
         <label htmlFor="email">
-          <input type="email" id="email" name="email" onChange={handleChange} value={user.email} placeholder="Your Email" required />
+          <input type="email" id="email" name="email" onChange={handleChange} value={userEmail} placeholder="Your Email" required />
         </label>
         <br />
 
         <label htmlFor="password">
-          <input type="password" id="password" name="password" onChange={handleChange} value={user.password} placeholder="Your Password" required />
+          <input type="password" id="password" name="password" onChange={handleChange} value={userPassword} placeholder="Your Password" required />
         </label>
         <br />
 

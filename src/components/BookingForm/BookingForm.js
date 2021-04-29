@@ -8,9 +8,10 @@ import styles from './BookingForm.module.scss';
 const BookingForm = ({ active, style }) => {
   const { bookings } = useSelector((state) => state.bookings);
   const { bookingsLoading } = useSelector((state) => state.loading);
-  const [booking, setBooking] = useState({ date: '', city: '' });
+  const [bookingDate, setBookingDate] = useState('');
+  const [bookingCity, setBookingCity] = useState('');
   const [styyle, setStyle] = useState(null);
-  const [doubleBooking, setdoubleBooking] = useState(false);
+  const [doubleBooking, setDoubleBooking] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
   let { hikeID } = useParams();
@@ -33,22 +34,22 @@ const BookingForm = ({ active, style }) => {
 
   const handleChange = (e) => {
     if (e.target.id === 'date') {
-      setBooking({ date: e.target.value, city: booking.city });
+      setBookingDate(e.target.value);
     } else if (e.target.id === 'city') {
-      setBooking({ date: booking.date, city: e.target.value });
+      setBookingCity(e.target.value);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const date = document.getElementById('date').value;
-    const city = document.getElementById('city').value;
+    const date = bookingDate;
+    const city = bookingCity;
     const dateMatch = bookings.find((booking) => date === booking.date);
 
     if (dateMatch) {
-      setdoubleBooking(true);
-      setTimeout(() => { setdoubleBooking(false); }, 3000);
+      setDoubleBooking(true);
+      setTimeout(() => { setDoubleBooking(false); }, 3000);
     } else {
       hikeID = Number(hikeID);
       const bookingParams = { date, city, hike_id: hikeID };
@@ -63,7 +64,8 @@ const BookingForm = ({ active, style }) => {
           accessToken, uid, client, tokenType, expiry,
         }));
 
-        setBooking({ date: '', city: '' });
+        setBookingDate('');
+        setBookingCity('');
         setStyle(styles.inactive);
         history.push('/bookings');
       }
@@ -87,12 +89,12 @@ const BookingForm = ({ active, style }) => {
         <label htmlFor="date">
           <span className={spanClass}>You already have a booking for this day!</span>
 
-          <input type="date" id="date" name="date" onChange={handleChange} value={booking.date} min={formatDate()} required />
+          <input type="date" id="date" name="date" onChange={handleChange} value={bookingDate} min={formatDate()} required />
         </label>
         <br />
 
         <label htmlFor="city">
-          <select name="city" id="city" value={booking.city} onChange={handleChange} required>
+          <select name="city" id="city" value={bookingCity} onChange={handleChange} required>
             <option value="" disabled>Choose a city</option>
             <option value={CITIES[0]}>{CITIES[0]}</option>
             <option value={CITIES[1]}>{CITIES[1]}</option>
