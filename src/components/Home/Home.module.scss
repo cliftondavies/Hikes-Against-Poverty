@@ -3,8 +3,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 25px;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background: rgba(0, 0, 0, 0.7) url('https://picsum.photos/id/1039/1024') no-repeat center/cover;
   background-blend-mode: overlay;
 }
@@ -15,10 +16,17 @@
   color: #fff;
 }
 
+@media screen and (max-width: 768px) {
+  .homeInfo {
+    width: 100%;
+  }
+}
+
 .homeInfo h1 {
   margin-bottom: 20px;
   font-weight: 900;
   letter-spacing: 5px;
+  line-height: 1.2;
 }
 
 .homeInfo h1::after {

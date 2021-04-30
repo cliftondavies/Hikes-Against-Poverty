@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../../redux/actions';
+import Toggle from '../Toggle/Toggle';
 import SideBar from '../SideBar/SideBar';
 import Home from '../Home/Home';
 import Hikes from '../Hikes/Hikes';
@@ -12,6 +13,7 @@ import Bookings from '../Bookings/Bookings';
 
 const App = () => {
   const [session, setSession] = useState(JSON.parse(sessionStorage.getItem('user')));
+  const [toggleStatus, setToggleStatus] = useState(false);
   const loggedIn = useSelector((state) => state.authenticated);
   const { hikes } = useSelector((state) => state.hikes);
   const dispatch = useDispatch();
@@ -26,9 +28,18 @@ const App = () => {
     setSession(JSON.parse(sessionStorage.getItem('user')));
   }, [loggedIn]);
 
+  const handleToggle = (toggleType) => {
+    if (toggleType === 'X') {
+      setToggleStatus(false);
+    } else {
+      setToggleStatus(true);
+    }
+  };
+
   return (
     <HashRouter>
-      <SideBar />
+      <Toggle active={toggleStatus} clickHandler={handleToggle} />
+      <SideBar active={toggleStatus} />
       <Switch>
         <Route exact path="/">
           {(loggedIn || session) ? <Redirect to="/hikes" /> : <Home />}

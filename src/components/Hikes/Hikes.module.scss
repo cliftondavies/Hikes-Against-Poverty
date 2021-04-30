@@ -4,6 +4,8 @@
   flex-direction: column;
   justify-content: center;
   width: 84%;
+  height: 100vh;
+  overflow: scroll;
   text-align: center;
   background: #fff;
 }
@@ -16,6 +18,27 @@
   font-size: 16px;
   font-weight: 900;
   color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .hikes {
+    width: 80%;
+  }
+
+  .hikes > span:first-child,
+  .hikes > span:nth-child(2) {
+    display: none;
+  }
+
+  .hikes > h2 {
+    padding-top: 24px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .hikes {
+    width: 100%;
+  }
 }
 
 .hikes > span:first-child {

@@ -1,12 +1,14 @@
 import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { signOut } from '../../api/api';
 import { logout } from '../../redux/actions';
 import styles from './SideBar.module.scss';
 
-const SideBar = () => {
+const SideBar = ({ active }) => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const toggle = (active) ? styles.toggle : null;
   let sideBarStyle = styles.showSideBar;
   let hikeLinkStyle;
   let bookingLinkStyle;
@@ -29,7 +31,7 @@ const SideBar = () => {
   };
 
   return (
-    <section className={sideBarStyle}>
+    <section className={`${sideBarStyle} ${toggle}`}>
       <div>
         <Link to="/hikes" className={styles.logo}>Hikes Against Poverty</Link>
 
@@ -58,6 +60,10 @@ const SideBar = () => {
       </div>
     </section>
   );
+};
+
+SideBar.propTypes = {
+  active: PropTypes.bool.isRequired,
 };
 
 export default SideBar;

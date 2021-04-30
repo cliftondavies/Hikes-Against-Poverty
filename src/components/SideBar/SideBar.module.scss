@@ -12,6 +12,28 @@ $mvp-green: #97bf0f;
   background: #fff;
 }
 
+@media screen and (max-width: 768px) {
+  .showSideBar {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .showSideBar {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    bottom: 0;
+    width: 40%;
+    z-index: 100;
+    transition: all 0.5s ease;
+  }
+
+  .toggle {
+    left: 0;
+  }
+}
+
 .showSideBar > div:first-child {
   display: flex;
   flex-direction: column;
@@ -20,6 +42,7 @@ $mvp-green: #97bf0f;
 }
 
 .logo {
+  margin-bottom: 20px;
   font: 700 22px/1 "Dancing Script", cursive;
   text-align: center;
   text-decoration: none;
@@ -80,17 +103,19 @@ $mvp-green: #97bf0f;
 }
 
 .showSideBar > div:last-child div {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .showSideBar i {
-  margin-right: 10px;
+  margin: 0 10px 5px 0;
   font-size: 15px;
 }
 
 .showSideBar > div:last-child span {
+  display: block;
   font-size: 9px;
   font-weight: 500;
+  line-height: 1.3;
 }
 
 .hideSideBar {

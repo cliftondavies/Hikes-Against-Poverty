@@ -45,3 +45,16 @@ select {
 .form input[type="submit"]:hover {
   background: darken($mvp-green, 5%);
 }
+
+@media screen and (max-width: 425px) {
+  .form input[type="email"],
+  .form input[type="text"],
+  .form input[type="password"],
+  .form input[type="submit"] {
+    width: 85%;
+  }
+
+  .form input[value="BOOK"] {
+    width: 50%;
+  }
+}
