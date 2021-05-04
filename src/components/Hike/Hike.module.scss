@@ -3,7 +3,6 @@
   display: flex;
   width: 84%;
   height: 100vh;
-  overflow: scroll;
   background: #fff;
 }
 
@@ -70,6 +69,7 @@
   .hike {
     flex-direction: column;
     width: 80%;
+    overflow: scroll;
   }
 
   .hike img {
