@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import ButtonList from '../ButtonList/ButtonList';
 import Form from '../Form/Form';
@@ -7,7 +8,7 @@ import styles from './Home.module.scss';
 const Home = () => {
   const [formType, setFormType] = useState('');
   const [formStatus, setFormStatus] = useState(false);
-  const [sent, setSent] = useState(false);
+  const isLoading = useSelector((state) => state.loadingStatus);
   const paragraph = 'There are over a million people living in poverty in the UK. Hikes Against Poverty is on a mission to raise funds for charities fighting against poverty in all its forms. We do this by organising daily hikes to breathtaking locations. 100% of all money raised from fees is donated to select charities.';
 
   const handleButtonClick = (buttonText) => {
@@ -26,10 +27,6 @@ const Home = () => {
     }
   };
 
-  const handleFormSubmit = (status) => {
-    setSent(status);
-  };
-
   const homeMain = (
     <div className={styles.homeInfo}>
       <h1>BOOK A HIKE AGAINST POVERTY</h1>
@@ -38,7 +35,7 @@ const Home = () => {
 
       <ButtonList buttonType={formType} clickHandler={handleButtonClick} />
 
-      <Form formType={formType} status={formStatus} formHandler={handleFormSubmit} />
+      <Form formType={formType} status={formStatus} />
     </div>
   );
 
@@ -53,7 +50,7 @@ const Home = () => {
 
   return (
     <div className={styles.home}>
-      {sent ? loader : homeMain}
+      {isLoading ? loader : homeMain}
     </div>
   );
 };

@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { signUp } from '../../api/api';
-import { login } from '../../redux/actions';
+import { setLoadingStatus, setError, login } from '../../redux/actions';
 import styles from './SignUpForm.module.scss';
 
-const SignUpForm = ({ active, formHandler, style }) => {
+const SignUpForm = ({ active, style }) => {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const error = useSelector((state) => state.error);
   const dispatch = useDispatch();
   const formClass = (active) ? styles.active : styles.inactive;
 
@@ -24,7 +25,7 @@ const SignUpForm = ({ active, formHandler, style }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    formHandler(true);
+    dispatch(setLoadingStatus(true));
 
     const name = userName;
     const email = userEmail;
@@ -33,9 +34,11 @@ const SignUpForm = ({ active, formHandler, style }) => {
     setUserEmail('');
     setUserPassword('');
     const signUpResponse = await signUp({ name, email, password });
+    dispatch(setLoadingStatus(false));
 
     if (signUpResponse instanceof Error) {
-      formHandler(false);
+      dispatch(setError({ error: 'Invalid email or password! Please try another.' }));
+      setTimeout(() => { dispatch(setError({ error: null })); }, 3000);
     } else {
       sessionStorage.setItem('user', JSON.stringify(signUpResponse));
       dispatch(login());
@@ -44,8 +47,10 @@ const SignUpForm = ({ active, formHandler, style }) => {
 
   return (
     <div className={`${style} ${formClass}`}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.signUpForm}>
         <label htmlFor="name">
+          <span>{error}</span>
+
           <input type="text" id="name" name="name" onChange={handleChange} value={userName} placeholder="Your Name" required />
         </label>
         <br />
@@ -68,7 +73,6 @@ const SignUpForm = ({ active, formHandler, style }) => {
 
 SignUpForm.propTypes = {
   active: PropTypes.bool.isRequired,
-  formHandler: PropTypes.func.isRequired,
   style: PropTypes.string.isRequired,
 };
 

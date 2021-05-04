@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { setLoadingStatus } from '../../redux/actions';
 import { getHikes } from '../../api/api';
 import Button from '../Button/Button';
 import Form from '../Form/Form';
@@ -9,7 +10,6 @@ import styles from './Hike.module.scss';
 
 const Hike = ({ hike }) => {
   const [button, setStatus] = useState({ status: false });
-  const { hikesLoading } = useSelector((state) => state.loading);
   const dispatch = useDispatch();
   let name;
   let image;
@@ -20,7 +20,9 @@ const Hike = ({ hike }) => {
   }
 
   useEffect(() => {
-    if (hikesLoading === 'idle' && JSON.parse(sessionStorage.getItem('user'))) {
+    if (JSON.parse(sessionStorage.getItem('user'))) {
+      dispatch(setLoadingStatus(true));
+
       const storedResponse = JSON.parse(sessionStorage.getItem('user'));
       const {
         accessToken, uid, client, tokenType, expiry,
@@ -30,7 +32,7 @@ const Hike = ({ hike }) => {
         accessToken, uid, client, tokenType, expiry,
       }));
     }
-  }, [hikesLoading, dispatch]);
+  }, []);
 
   const tableRow = (feeType, price) => (
     <tr>

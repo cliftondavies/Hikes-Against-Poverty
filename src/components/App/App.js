@@ -14,7 +14,7 @@ import Bookings from '../Bookings/Bookings';
 const App = () => {
   const [session, setSession] = useState(JSON.parse(sessionStorage.getItem('user')));
   const [toggleStatus, setToggleStatus] = useState(false);
-  const loggedIn = useSelector((state) => state.authenticated);
+  const loggedIn = useSelector((state) => state.authStatus);
   const { hikes } = useSelector((state) => state.hikes);
   const dispatch = useDispatch();
 

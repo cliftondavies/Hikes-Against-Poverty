@@ -1,5 +1,5 @@
 import {
-  loadHikes, loadBookings, loadError,
+  setLoadingStatus, setError, setHikes, setBookings,
 } from '../redux/actions';
 
 export const getHikes = ({
@@ -21,9 +21,12 @@ export const getHikes = ({
 
     const responseBody = await response.json();
 
-    if (getState().loading.hikesLoading === 'idle') { dispatch(loadHikes(responseBody)); }
+    if (getState().loadingStatus) { dispatch(setLoadingStatus(false)); }
+
+    dispatch(setHikes(responseBody));
+    dispatch(setError({ error: null }));
   } catch (error) {
-    dispatch(loadError({ error: error.message }));
+    dispatch(setError({ error: error.message }));
   }
 };
 
@@ -47,9 +50,12 @@ export const userBookings = ({
 
     const responseBody = await response.json();
 
-    if (getState().loading.bookingsLoading === 'idle') { dispatch(loadBookings(responseBody)); }
+    if (getState().loadingStatus) { dispatch(setLoadingStatus(false)); }
+
+    dispatch(setBookings(responseBody));
+    dispatch(setError({ error: null }));
   } catch (error) {
-    dispatch(loadError({ error: error.message }));
+    dispatch(setError({ error: error.message }));
   }
 };
 
@@ -157,8 +163,11 @@ export const book = (id, bookingParams, {
 
     const responseBody = await response.json();
 
-    if (getState().bookings.bookings) { dispatch(loadBookings(responseBody)); }
+    if (getState().loadingStatus) { dispatch(setLoadingStatus(false)); }
+
+    dispatch(setBookings(responseBody));
+    dispatch(setError({ error: null }));
   } catch (error) {
-    dispatch(loadError({ error: error.message }));
+    dispatch(setError({ error: error.message }));
   }
 };

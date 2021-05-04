@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import BookingCard from '../BookingCard/BookingCard';
+import { setLoadingStatus } from '../../redux/actions';
 import { userBookings, getHikes } from '../../api/api';
 import styles from './BookingList.module.scss';
 
 const BookingList = () => {
   const { bookings } = useSelector((state) => state.bookings);
-  const { bookingsLoading } = useSelector((state) => state.loading);
   const error = useSelector((state) => state.error);
   const dispatch = useDispatch();
   const extraBookingCards = 9 - bookings.length;
@@ -20,7 +20,9 @@ const BookingList = () => {
   };
 
   useEffect(() => {
-    if (bookingsLoading === 'idle' && JSON.parse(sessionStorage.getItem('user'))) {
+    if (JSON.parse(sessionStorage.getItem('user'))) {
+      dispatch(setLoadingStatus(true));
+
       const storedResponse = JSON.parse(sessionStorage.getItem('user'));
       const {
         accessToken, uid, client, tokenType, expiry,
@@ -33,7 +35,7 @@ const BookingList = () => {
         accessToken, uid, client, tokenType, expiry,
       }));
     }
-  }, [bookingsLoading, dispatch]);
+  }, []);
 
   return (
     <div className={styles.bookingList}>

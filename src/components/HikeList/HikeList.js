@@ -1,17 +1,19 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { setLoadingStatus } from '../../redux/actions';
 import { getHikes } from '../../api/api';
 import HikeCard from '../HikeCard/HikeCard';
 import styles from './HikeList.module.scss';
 
 const HikeList = ({ hikes }) => {
-  const { hikesLoading } = useSelector((state) => state.loading);
   const error = useSelector((state) => state.error);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (hikesLoading === 'idle' && JSON.parse(sessionStorage.getItem('user'))) {
+    if (JSON.parse(sessionStorage.getItem('user'))) {
+      dispatch(setLoadingStatus(true));
+
       const storedResponse = JSON.parse(sessionStorage.getItem('user'));
       const {
         accessToken, uid, client, tokenType, expiry,
@@ -21,7 +23,7 @@ const HikeList = ({ hikes }) => {
         accessToken, uid, client, tokenType, expiry,
       }));
     }
-  }, [hikesLoading, dispatch]);
+  }, []);
 
   return (
     <div className={styles.hikeList}>

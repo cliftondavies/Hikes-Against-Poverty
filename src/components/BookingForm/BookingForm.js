@@ -2,16 +2,16 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { setLoadingStatus, setError } from '../../redux/actions';
 import { userBookings, book } from '../../api/api';
 import styles from './BookingForm.module.scss';
 
 const BookingForm = ({ active, style }) => {
   const { bookings } = useSelector((state) => state.bookings);
-  const { bookingsLoading } = useSelector((state) => state.loading);
+  const error = useSelector((state) => state.error);
   const [bookingDate, setBookingDate] = useState('');
   const [bookingCity, setBookingCity] = useState('');
   const [styyle, setStyle] = useState(null);
-  const [bookingError, setBookingError] = useState(null);
   const history = useHistory();
   const dispatch = useDispatch();
   let { hikeID } = useParams();
@@ -19,7 +19,9 @@ const BookingForm = ({ active, style }) => {
   const formClass = (active) ? styles.active : styles.inactive;
 
   useEffect(() => {
-    if (bookingsLoading === 'idle' && JSON.parse(sessionStorage.getItem('user'))) {
+    if (JSON.parse(sessionStorage.getItem('user'))) {
+      dispatch(setLoadingStatus(true));
+
       const storedResponse = JSON.parse(sessionStorage.getItem('user'));
       const {
         accessToken, uid, client, tokenType, expiry,
@@ -29,7 +31,7 @@ const BookingForm = ({ active, style }) => {
         accessToken, uid, client, tokenType, expiry,
       }));
     }
-  }, [bookingsLoading, dispatch]);
+  }, []);
 
   const handleChange = (e) => {
     if (e.target.id === 'date') {
@@ -47,13 +49,15 @@ const BookingForm = ({ active, style }) => {
     const dateMatch = bookings.find((booking) => date === booking.date);
 
     if (dateMatch) {
-      setBookingError('You already have a booking for this day!');
-      setTimeout(() => { setBookingError(null); }, 3000);
+      dispatch(setError({ error: 'You already have a booking for this day!' }));
+      setTimeout(() => { dispatch(setError({ error: null })); }, 3000);
     } else {
       hikeID = Number(hikeID);
       const bookingParams = { date, city, hike_id: hikeID };
 
       if (JSON.parse(sessionStorage.getItem('user'))) {
+        dispatch(setLoadingStatus(true));
+
         const storedResponse = JSON.parse(sessionStorage.getItem('user'));
         const {
           accessToken, uid, client, tokenType, expiry,
@@ -86,7 +90,7 @@ const BookingForm = ({ active, style }) => {
     <div className={`${style} ${styyle || formClass}`}>
       <form onSubmit={handleSubmit} className={styles.bookingForm}>
         <label htmlFor="date">
-          <span>{bookingError}</span>
+          <span>{error}</span>
 
           <input type="date" id="date" name="date" onChange={handleChange} value={bookingDate} min={formatDate()} required />
         </label>

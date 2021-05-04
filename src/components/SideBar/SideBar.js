@@ -2,7 +2,9 @@ import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { signOut } from '../../api/api';
-import { logout } from '../../redux/actions';
+import {
+  setLoadingStatus, setError, setHikes, setBookings, logout,
+} from '../../redux/actions';
 import styles from './SideBar.module.scss';
 
 const SideBar = ({ active }) => {
@@ -19,13 +21,21 @@ const SideBar = ({ active }) => {
 
   const handleClick = async () => {
     if (JSON.parse(sessionStorage.getItem('user'))) {
+      dispatch(setLoadingStatus(true));
+
       const storedResponse = JSON.parse(sessionStorage.getItem('user'));
       const { uid, client, accessToken } = storedResponse.authentication;
       const signOutResponse = await signOut({ uid, client, accessToken });
 
       if (!(signOutResponse instanceof Error)) {
         sessionStorage.clear();
+        dispatch(setLoadingStatus(false));
         dispatch(logout());
+        dispatch(setHikes([]));
+        dispatch(setBookings([]));
+        dispatch(setError({ error: null }));
+      } else {
+        dispatch(setError({ error: signOutResponse.message }));
       }
     }
   };
@@ -38,6 +48,7 @@ const SideBar = ({ active }) => {
         <nav>
           <Link to="/hikes" className={hikeLinkStyle}>HIKES</Link>
           <Link to="/bookings" className={bookingLinkStyle}>BOOKINGS</Link>
+
           <button type="button">SHOP</button>
           <button type="button">VIRTUAL TOUR</button>
         </nav>
