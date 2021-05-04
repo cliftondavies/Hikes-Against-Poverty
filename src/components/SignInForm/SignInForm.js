@@ -12,14 +12,6 @@ const SignInForm = ({ active, style }) => {
   const dispatch = useDispatch();
   const formClass = (active) ? styles.active : styles.inactive;
 
-  const handleChange = (e) => {
-    if (e.target.id === 'email') {
-      setUserEmail(e.target.value);
-    } else if (e.target.id === 'password') {
-      setUserPassword(e.target.value);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(setLoadingStatus(true));
@@ -46,12 +38,12 @@ const SignInForm = ({ active, style }) => {
         <label htmlFor="email">
           <span>{error}</span>
 
-          <input type="email" id="email" name="email" onChange={handleChange} value={userEmail} placeholder="Your Email" required />
+          <input type="email" id="email" name="email" onChange={(e) => setUserEmail(e.target.value)} value={userEmail} placeholder="Your Email" required />
         </label>
         <br />
 
         <label htmlFor="password">
-          <input type="password" id="password" name="password" onChange={handleChange} value={userPassword} placeholder="Your Password" required />
+          <input type="password" id="password" name="password" onChange={(e) => setUserPassword(e.target.value)} value={userPassword} placeholder="Your Password" required />
         </label>
         <br />
 

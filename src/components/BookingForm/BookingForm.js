@@ -33,14 +33,6 @@ const BookingForm = ({ active, style }) => {
     }
   }, []);
 
-  const handleChange = (e) => {
-    if (e.target.id === 'date') {
-      setBookingDate(e.target.value);
-    } else if (e.target.id === 'city') {
-      setBookingCity(e.target.value);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -92,12 +84,12 @@ const BookingForm = ({ active, style }) => {
         <label htmlFor="date">
           <span>{error}</span>
 
-          <input type="date" id="date" name="date" onChange={handleChange} value={bookingDate} min={formatDate()} required />
+          <input type="date" id="date" name="date" onChange={(e) => setBookingDate(e.target.value)} value={bookingDate} min={formatDate()} required />
         </label>
         <br />
 
         <label htmlFor="city">
-          <select name="city" id="city" value={bookingCity} onChange={handleChange} required>
+          <select name="city" id="city" value={bookingCity} onChange={(e) => setBookingCity(e.target.value)} required>
             <option value="" disabled>Choose a city</option>
             <option value={CITIES[0]}>{CITIES[0]}</option>
             <option value={CITIES[1]}>{CITIES[1]}</option>
