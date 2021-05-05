@@ -1,0 +1,29 @@
+.showToggle {
+  display: none;
+}
+
+@media screen and (max-width: 425px) {
+  .showToggle {
+    display: inline-block;
+    position: absolute;
+    top: 17.5px;
+    left: 10px;
+    border: none;
+    padding: 0;
+    font-size: 30px;
+    line-height: 0.8;
+    background: transparent;
+    cursor: pointer;
+    z-index: 150;
+  }
+
+  .closeToggle {
+    top: 5px;
+    left: 5px;
+    background: lightblue;
+  }
+}
+
+.hideToggle {
+  display: none;
+}

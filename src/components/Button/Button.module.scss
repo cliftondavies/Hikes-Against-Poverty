@@ -1,0 +1,44 @@
+$mvp-green: #97bf0f;
+$white: #fff;
+
+.btn {
+  margin: 0 15px;
+  border-radius: 20px;
+  border: 1px solid #fff;
+  font-size: 15px;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 425px) {
+  .btn {
+    margin: 0 10px;
+    padding: 10px 25px;
+  }
+}
+
+.active {
+  color: #fff;
+  background: transparent;
+}
+
+.inactive {
+  color: $mvp-green;
+  font-weight: 600;
+}
+
+.inactive:hover {
+  background: darken($white, 15%);
+}
+
+.bookingBtn {
+  margin-bottom: 15px;
+  font-weight: 600;
+  background: $mvp-green;
+  color: #fff;
+}
+
+.bookingBtn:hover {
+  background: darken($mvp-green, 5%);
+}

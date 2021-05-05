@@ -1,0 +1,80 @@
+.hikes {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 84%;
+  height: 100vh;
+  text-align: center;
+  background: #fff;
+}
+
+.hikes > span:first-child,
+.hikes > span:nth-child(2) {
+  position: absolute;
+  top: 45%;
+  padding: 15px 0;
+  font-size: 16px;
+  font-weight: 900;
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .hikes {
+    width: 80%;
+    overflow: scroll;
+  }
+
+  .hikes > span:first-child,
+  .hikes > span:nth-child(2) {
+    display: none;
+  }
+
+  .hikes > h2 {
+    padding-top: 24px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .hikes {
+    width: 100%;
+  }
+}
+
+.hikes > span:first-child {
+  right: 0;
+  border-radius: 20px 0 0 20px;
+  padding-right: 30px;
+  padding-left: 15px;
+  background: #97bf0f;
+}
+
+.hikes > span:nth-child(2) {
+  left: 0;
+  border-radius: 0 20px 20px 0;
+  padding-left: 30px;
+  padding-right: 15px;
+  background: #f1f1f1;
+}
+
+.hikes > h2 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.hikes > span:nth-of-type(3) {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: lightgrey;
+}
+
+.hikes > span:nth-of-type(3)::after {
+  display: block;
+  margin: 30px auto;
+  border: 1px dotted lightgrey;
+  width: 10%;
+  content: '';
+}

@@ -1,0 +1,47 @@
+.home {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  width: 100%;
+  min-height: 100vh;
+  background: rgba(0, 0, 0, 0.7) url('https://picsum.photos/id/1039/1024') no-repeat center/cover;
+  background-blend-mode: overlay;
+}
+
+.homeInfo {
+  width: 65%;
+  text-align: center;
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .homeInfo {
+    width: 100%;
+  }
+}
+
+.homeInfo h1 {
+  margin-bottom: 20px;
+  font-weight: 900;
+  letter-spacing: 5px;
+  line-height: 1.2;
+}
+
+.homeInfo h1::after {
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  content: '';
+  width: 75%;
+  border-bottom: 0.5px solid #fff;
+}
+
+.homeInfo p {
+  margin-bottom: 35px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 2px;
+}

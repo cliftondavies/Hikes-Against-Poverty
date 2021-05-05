@@ -1,0 +1,22 @@
+.bookings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 84%;
+  height: 100vh;
+  background: #e4e5e9 url('https://picsum.photos/id/108/860/671') no-repeat center/cover;
+  background-blend-mode: screen;
+}
+
+@media screen and (max-width: 768px) {
+  .bookings {
+    width: 80%;
+    overflow: scroll;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .bookings {
+    width: 100%;
+  }
+}
