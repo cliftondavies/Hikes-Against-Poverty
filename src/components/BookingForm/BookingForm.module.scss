@@ -1,0 +1,17 @@
+.bookingForm {
+  text-align: right;
+}
+
+.active {
+  display: block;
+}
+
+.inactive {
+  display: none;
+}
+
+.bookingForm span {
+  display: block;
+  font-size: 12px;
+  color: red;
+}

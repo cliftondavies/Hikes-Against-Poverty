@@ -1,0 +1,15 @@
+.hikeList {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px 50px 0 50px;
+  min-height: 382px;
+}
+
+@media screen and (max-width: 768px) {
+  .hikeList {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 15px 10px 0 10px;
+  }
+}

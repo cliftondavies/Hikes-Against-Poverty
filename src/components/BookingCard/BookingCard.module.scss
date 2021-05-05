@@ -1,0 +1,79 @@
+.bookingCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 33.33%;
+  min-height: 150px;
+  border-bottom: 0.1px solid #e4e5e9;
+  border-right: 0.1px solid #e4e5e9;
+  color: #fff;
+}
+
+@media screen and (max-width: 425px) {
+  .bookingCard {
+    margin-bottom: 15px;
+    border-radius: 15px;
+    width: 100%;
+  }
+}
+
+.bookingCard h3 {
+  margin-bottom: 3px;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.bookingCard span {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.bookingCard span:first-of-type,
+.bookingCard span:nth-of-type(2) {
+  margin-bottom: 10px;
+}
+
+.bookingCard .empty {
+  margin-bottom: 0;
+  font-size: 13px;
+}
+
+.coast {
+  background: rgba(0, 0, 0, 0.6) url('https://picsum.photos/id/1050/200/200') no-repeat center/cover;
+  background-blend-mode: overlay;
+}
+
+.fjord {
+  background: rgba(0, 0, 0, 0.6) url('https://picsum.photos/id/1015/200/200') no-repeat center/cover;
+  background-blend-mode: overlay;
+}
+
+.mountain {
+  background: rgba(0, 0, 0, 0.6) url('https://picsum.photos/id/1018/200/200') no-repeat center/cover;
+  background-blend-mode: overlay;
+}
+
+.green {
+  background: #97bf0f;
+}
+
+.yellow {
+  background: #ffc600;
+}
+
+.sky {
+  background: #10bbb5;
+}
+
+.black {
+  background: #252525;
+}
+
+.pink {
+  background: #f72967;
+}
+
+.blue {
+  background: #0057ff;
+}

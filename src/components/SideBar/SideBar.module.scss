@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+$mvp-green: #97bf0f;
+
+.showSideBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 3px solid #f1f1f1;
+  padding: 23px 0 20px 10px;
+  width: 16%;
+  background: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .showSideBar {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .showSideBar {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    bottom: 0;
+    width: 40%;
+    z-index: 100;
+    transition: all 0.5s ease;
+  }
+
+  .toggle {
+    left: 0;
+  }
+}
+
+.showSideBar > div:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 45%;
+}
+
+.logo {
+  margin-bottom: 20px;
+  font: 700 22px/1 "Dancing Script", cursive;
+  text-align: center;
+  text-decoration: none;
+  transform: rotate(-10deg);
+  color: #000;
+}
+
+.logo::after {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid #000;
+  width: 50%;
+  content: '';
+}
+
+.showSideBar nav a,
+.showSideBar nav button {
+  display: block;
+  padding: 12px 15px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+}
+
+.showSideBar .activePage {
+  background: $mvp-green;
+  color: #fff;
+}
+
+.showSideBar nav button {
+  border: none;
+  width: 100%;
+  text-align: left;
+  background: none;
+}
+
+.showSideBar > div:last-child {
+  padding-left: 15px;
+}
+
+.showSideBar > div:last-child button {
+  margin-bottom: 20px;
+  border: 1px solid #000;
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  background: #f1f1f1;
+  cursor: pointer;
+}
+
+.showSideBar > div:last-child button:hover {
+  border: none;
+  background: $mvp-green;
+  color: #fff;
+}
+
+.showSideBar > div:last-child div {
+  margin-bottom: 10px;
+}
+
+.showSideBar i {
+  margin: 0 10px 5px 0;
+  font-size: 15px;
+}
+
+.showSideBar > div:last-child span {
+  display: block;
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.hideSideBar {
+  display: none;
+}

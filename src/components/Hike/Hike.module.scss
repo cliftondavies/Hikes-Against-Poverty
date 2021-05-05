@@ -1,0 +1,111 @@
+.hike {
+  position: relative;
+  display: flex;
+  width: 84%;
+  height: 100vh;
+  background: #fff;
+}
+
+.hike img {
+  display: block;
+  border-radius: 10px;
+  width: 580px;
+  height: 100vh;
+}
+
+.hike section:last-child {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 35px 0 15px;
+}
+
+.hike h2 {
+  margin-bottom: 8px;
+  font-size: 20px;
+  font-weight: 900;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.hike h2 + span {
+  margin-bottom: 30px;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: right;
+}
+
+.hike table {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.hike table tr:nth-child(odd) {
+  background: #e2e3e5;
+}
+
+.hike table td {
+  padding: 10px 15px 10px 10px;
+}
+
+.hike table + span {
+  margin-bottom: 30px;
+  font-size: 15px;
+}
+
+.hike section:first-child > span {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  border-radius: 0 20px 20px 0;
+  padding: 15px 15px 15px 30px;
+  font-size: 16px;
+  font-weight: 700;
+  background: #97bf0f;
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .hike {
+    flex-direction: column;
+    width: 80%;
+    overflow: scroll;
+  }
+
+  .hike img {
+    width: 100%;
+  }
+
+  .hike section:first-child {
+    margin-bottom: 20px;
+  }
+
+  .hike section:last-child {
+    padding-right: 15px;
+    padding-bottom: 150px;
+  }
+
+  .hike section:first-child > span {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .hike {
+    width: 100%;
+  }
+}
+
+.hike strong {
+  font-weight: 900;
+}
+
+.hike a {
+  margin-bottom: 30px;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: right;
+  text-decoration: none;
+  color: #000;
+}
