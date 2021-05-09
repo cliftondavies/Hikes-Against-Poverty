@@ -1,5 +1,6 @@
 .bookings {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 84%;
@@ -8,15 +9,36 @@
   background-blend-mode: screen;
 }
 
+.bookings > h2 {
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.bookings > h2::after {
+  display: block;
+  margin: 30px auto 34px auto;
+  border: 1px dotted lightgrey;
+  width: 40%;
+  content: '';
+}
+
 @media screen and (max-width: 768px) {
   .bookings {
     width: 80%;
-    overflow: scroll;
+  }
+
+  .bookings > h2:after {
+    margin: 20px auto 24px auto;
   }
 }
 
 @media screen and (max-width: 425px) {
   .bookings {
     width: 100%;
+  }
+
+  .bookings > h2 {
+    padding-top: 24px;
   }
 }
