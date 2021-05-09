@@ -25,12 +25,12 @@ const SideBar = ({ active }) => {
 
       const storedResponse = JSON.parse(sessionStorage.getItem('user'));
       const { uid, client, accessToken } = storedResponse.authentication;
+      sessionStorage.clear();
+      dispatch(logout());
       const signOutResponse = await signOut({ uid, client, accessToken });
 
       if (!(signOutResponse instanceof Error)) {
-        sessionStorage.clear();
         dispatch(setLoadingStatus(false));
-        dispatch(logout());
         dispatch(setHikes([]));
         dispatch(setBookings([]));
         dispatch(setError({ error: null }));
