@@ -8,7 +8,7 @@
 
 > There are over a million people living in poverty in the UK. HAP is on a mission to raise funds for charities fighting against poverty, through daily hike events. HAP is built on top of the [HAP API](https://github.com/cliftondavies/HAP-API).
 
-![screenshot](hap.png)
+![screenshot](hap.gif)
 
 ## :tv: Media
 
@@ -16,7 +16,7 @@
 
 ## MVP Features
 
-This MVP persists the app state after a browser refresh, and allows a user to:
+This MVP allows a user to:
 
 - Before Authentication:
   - View the Home page
