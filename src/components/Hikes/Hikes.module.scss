@@ -23,6 +23,12 @@
   .hikes {
     width: 80%;
     overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hikes::-webkit-scrollbar {
+    display: none;
   }
 
   .hikes > span:first-child,

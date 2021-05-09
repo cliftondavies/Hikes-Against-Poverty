@@ -71,6 +71,12 @@
     flex-direction: column;
     width: 80%;
     overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hike::-webkit-scrollbar {
+    display: none;
   }
 
   .hike img {
