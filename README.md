@@ -39,6 +39,7 @@ This MVP allows a user to:
 - JavaScript ES6
 - React 17.0.2
 - Redux >4.0.5
+- Jest v26.6
 
 ## :rocket: Getting Started
 
